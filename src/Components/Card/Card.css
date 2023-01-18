@@ -1,0 +1,76 @@
+
+.card {
+    
+}
+.card:hover {
+    box-shadow: 0px 0px 8px 1px ;
+}
+.card__pic {
+    position: relative;
+    max-width: 236px;
+}
+
+.card__percent { 
+    position: absolute;
+    max-width: 58px;
+    text-align: center;
+    padding: 2px 8px;
+    background-color: var(--sale-color);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--base-color);
+    border-radius: 20px;
+}
+
+.card__logo {
+    height: 18px;
+    width: 20px;
+    position: absolute;
+    right: 0;
+    left: auto;
+}
+.card__favorit-icon{
+    max-width: 100%;
+}
+
+
+.card__favorit {
+    background-color: var(--base-color);
+}
+.card__desc {
+}
+.card__link {
+}
+.card__price {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+    color: var(--sale-color);
+}
+.card__how {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 14px;
+    color: var(--sorting-color);
+    margin-top: 6px;
+}
+.card__text {
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    margin-top: 2px;
+}
+.card__wrap-btn {
+    
+    margin-top: 16px;
+}
+.card__btn {
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    background-color: var(--bg-color);
+    border-radius: 55px
+}
