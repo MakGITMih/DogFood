@@ -1,16 +1,14 @@
 import React from "react";
 import '../CardList/CardList.css'
 import  {Card}  from '../Card/Card';
-import data from '../data.json'
+import data from '../data.json' // Локальная база данных
 
 export function CardList (params) {
-    // console.log ({data});
+    console.log ({data});
     return(
     <div className="cardlist _container"> 
-    {/* <div className="cardlist__wrap"> */}
-     {data.map((item)=><Card></Card>)}
-     
+         {data.map((item)=><Card {...item}></Card>)}
      </div>        
-    // </div>
+    
     )
 }

@@ -12,11 +12,9 @@ import './App.css';
 function App() {
   return (
     <div className="App">
-      <Header></Header>
-      {/* <Card></Card> */}
+      <Header></Header>      
        <CardList></CardList>
-      <Main></Main>
-      <></>
+       <Main></Main>
        <Footer></Footer>
 
 

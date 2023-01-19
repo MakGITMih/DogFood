@@ -8,7 +8,7 @@ import Vk from '../Images/vk.svg'
 import Whatsapp from '../Images/whatsapp.svg'
 
 
-export function Footer (params) {
+export function Footer () {
     return (
         <>
         <div className="footer">
