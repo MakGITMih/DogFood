@@ -1,26 +1,21 @@
 import React from "react";
 import './Header.css'
-// import Logo from '../Images/logo.svg'
-import Heart from '../Images/heart.svg'
+// import '../Card/Card.jsx'
+import Logo from '../Images/logo.svg'
 import Bag from '../Images/buy.svg'
 import Muzzle from '../Images/muzzle.svg'
 import Close from '../Images/close.svg'
-import { LogoComponent } from "../Component.jsx";
+import {ReactComponent as Heart} from '../Images/heart.svg'
 
-// export function LogoComponent (params) {
-//     return(
-//          <a href="#" className="header__logo">
-//              <img className="Logo" src={Logo} alt="Что то сломалось..."/>
-//          </a>
-//     )
-// }
-
-export function Header (params) {
+export function Header () {
+    
     return(
       <header className="header">
             <div className="header__container _container">
-                <div className="header__wrap-logo">
-                    <LogoComponent></LogoComponent>
+                 <div className="header__wrap-logo">
+                    <a href="#" className="header__logo">
+                        <img className="header__logo-img" src={Logo} alt="Что то сломалось..."/>
+                    </a>
                 </div>
                 <div className="header__wrap-search"> 
                      <form action="#" className="header__search">                        
@@ -31,7 +26,8 @@ export function Header (params) {
                 <div className="header__wrap-icons">
                     <div className="header__icon-container">
                         <div className="header__heart">
-                            <img className="header__heart-img" src={Heart} alt="Что то сломалось..."/>
+                            <Heart className="header__heart-img"></Heart>
+
                         </div>
                         <div className="header__bag">
                             <img className="header__bag-img" src={Bag} alt="Что то сломалось..."/>

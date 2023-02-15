@@ -1,6 +1,6 @@
 import React from "react";
 import './Footer.css'
-import { LogoComponent } from "../Component";
+import Logo from '../Images/logo.svg'
 import Instagram from '../Images/instagram.svg'
 import Telegram from '../Images/telegram.svg'
 import Viber from '../Images/viber.svg'
@@ -14,7 +14,11 @@ export function Footer () {
         <div className="footer">
             <div className="footer__container _container">
                 <div className="footer__wrap-logo">
-                    <div className="footer__logo"><LogoComponent></LogoComponent></div>
+                    <div className="footer__logo">
+                         <a href="#" className="header__logo">
+                             <img className="header__logo-img" src={Logo} alt="Что то сломалось..."/>
+                         </a>
+                    </div>
                     <span className="footer__text"> © «Интернет-магазин DogFood.ru»</span> 
                 </div>
                 <div className="footer__wrap-subtitles-left" >

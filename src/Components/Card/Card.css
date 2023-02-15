@@ -3,6 +3,7 @@
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    padding: 10px;
 }
 
 .card:hover {
@@ -37,9 +38,17 @@
 
 .card__favorit {
     background-color: var(--base-color);
+    cursor: pointer;
 
 }
-.card__favorit-icon{  
+
+.card__nofavorit-icon{ 
+    stroke: black;
+    opacity: 0.5;
+}
+
+.card__favorit-icon{ 
+    fill:var(--sale-color); 
     
 }
 
@@ -47,19 +56,33 @@
     
 }
 .card__link {
-    
+    display: flex;
+    flex-direction: column;
 }
 .card__pic{
     max-width: 100%;
 }
 
+
 .card__price {
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.card__old-price {
+    font-weight: 600;
+    font-size: 12px;
+    line-height: 14px;
+    text-decoration: line-through;   
+}
+
+.card__new-price {   
     font-weight: 800;
     font-size: 20px;
     line-height: 24px;
     color: var(--sale-color);
 }
-
 .card__how {
     font-weight: 400;
     font-size: 12px;
@@ -77,15 +100,16 @@
 
 .card__wrap-btn { 
     margin-top: 16px;
+    
 }
 
 .card__btn:hover {
-    font-weight: 900;
     background-color: var(--basket-color);
-    transition: background-color,font-weight .2s;
+    transition: background-color.2s;
 }
 
 .card__btn {
+    cursor: pointer;
     padding: 10px 18px;
     font-weight: 700;
     font-size: 16px;

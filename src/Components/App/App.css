@@ -5,8 +5,15 @@
    min-height: 100vh;
 }
 
-
-
+.btn {
+  border-radius: 15px;
+  border: 1px solid black;
+  cursor: pointer;
+  max-width: 100%;
+}
+.result{
+  max-width: 20px;
+}
 
 
 
