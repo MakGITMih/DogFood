@@ -7,7 +7,7 @@ import Muzzle from '../Images/muzzle.svg'
 import Close from '../Images/close.svg'
 import {ReactComponent as Heart} from '../Images/heart.svg'
 
-export function Header () {
+export function Header ({changeInput}) {
     
     return(
       <header className="header">
@@ -17,10 +17,12 @@ export function Header () {
                         <img className="header__logo-img" src={Logo} alt="Что то сломалось..."/>
                     </a>
                 </div>
-                <div className="header__wrap-search"> 
+                <div className="header__wrap-search" > 
                      <form action="#" className="header__search">                        
-                         <input className="header__search-input" autoFocus placeholder="Поиск"></input>                                                
-                         <button type="submit" className="header__search-btn"><div className="header__wrap-close"><img className="header__close-img" src={Close} alt="Что то сломалось..."/></div></button>                         
+                         <input className="header__search-input" type="text" autoFocus placeholder="Поиск" onInput={changeInput}></input>                                                
+                         {/* <button type="submit" className="header__search-btn">
+                            <div className="header__wrap-close"><img className="header__close-img" src={Close} alt="Что то сломалось..."/></div>
+                        </button>                          */}
                      </form>
                 </div>
                 <div className="header__wrap-icons">

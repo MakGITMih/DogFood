@@ -1,0 +1,11 @@
+.search {
+    margin-top: 20px;
+}
+.search__container {
+    font-weight: 300;
+    font-size: 28px;
+    line-height: 32px;
+}
+.search__text {
+    font-weight: 900;
+}

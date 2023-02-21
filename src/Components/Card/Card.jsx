@@ -8,15 +8,14 @@ import '../data.json'
     const discount_price = Math.round (price - price * discount/100);
     return(
     <>
-    <div className="card"> 
-       
+    <div className="card">  
         <div className="card__icons">
-                {!!discount &&  <span className="card__percent">-{discount}%</span>}                         
-                <div className="card__logo">
-                     <button className="card__favorit">
+            {!!discount &&  <span className="card__percent">-{discount}%</span>}                         
+            <div className="card__logo">
+                <button className="card__favorit">
                         <Heart className ={isFavorite ? "card__favorit-icon" : 'card__nofavorit-icon' }></Heart>
-                     </button> 
-                </div>         
+                </button> 
+            </div>         
         </div>
         <div className="card__desc">
             <a href="#" className="card__link">
@@ -27,11 +26,9 @@ import '../data.json'
                  <p className="card__text">{name}</p>
             </a>    
         </div>
-        <div className="card__wrap-btn">
-            
+        <div className="card__wrap-btn"> 
             <button className="card__btn">В корзину</button>
-        </div>
-                  
+        </div>                 
     </div>
     </>  
     )
