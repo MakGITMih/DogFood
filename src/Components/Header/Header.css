@@ -71,6 +71,10 @@
     justify-content: flex-end;
 }
 
+.header__entry{
+    cursor: pointer;
+}
+
 .header__heart-img{
     stroke: var(--text-color);
     height: 18px;

@@ -1,14 +1,13 @@
 import React from "react";
 import '../CardList/CardList.css'
 import  {Card}  from '../Card/Card';
-// import data from '../data.json' 
-// Локальная база данных
 
-export function CardList ({ data}) {
-    // console.log (data);
+
+export function CardList ({data,currentUser, onProductLike}) {
     return(
     <div className="cardlist _container"> 
-         {data.map((item,index)=><Card {...item} key = {`${index}-${item.name}`}></Card>)}
+         {data.map((item,index)=><Card {...item} key={item._id} currentUser={currentUser}
+          onProductLike={onProductLike}></Card>)}
      </div>        
     
     )

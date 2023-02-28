@@ -1,25 +1,32 @@
 import React from "react";
 import '../Card/Card.css'
 import {ReactComponent as Heart} from '../Images/heart.svg'
-import '../data.json'
+// import '../data.json'
 
 
- export function Card ({name,picture,discount,price,wight,isFavorite }) {
-    const discount_price = Math.round (price - price * discount/100);
+ export function Card ({ name,price,discount,wight,pictures,likes,currentUser,
+    onProductLike,_id, }) {
+
+        function handleLikeClick(){
+            onProductLike({_id,likes})
+        }
+
+        const liked = likes.some((id) => id === currentUser?._id);    
+        const discount_price = Math.round (price - price * discount/100);
     return(
     <>
     <div className="card">  
         <div className="card__icons">
             {!!discount &&  <span className="card__percent">-{discount}%</span>}                         
             <div className="card__logo">
-                <button className="card__favorit">
-                        <Heart className ={isFavorite ? "card__favorit-icon" : 'card__nofavorit-icon' }></Heart>
+                <button className="card__favorit" onClick={handleLikeClick}>
+                        <Heart className ={ liked ? "card__favorit-icon" : 'card__nofavorit-icon' }></Heart>
                 </button> 
             </div>         
         </div>
         <div className="card__desc">
             <a href="#" className="card__link">
-                 <img src={picture} alt="Тут где - то был товар..." className ="card__pic"/>
+                 <img src={pictures} alt="Тут где - то был товар..." className ="card__pic"/>
                  <span className={!! discount ? 'card__old-price' : 'card__price'}>{price}&nbsp;₽</span>
                  {!! discount && <span className="card__new-price">{discount_price}&nbsp;₽</span>}               
                  <span className="card__how">{wight}</span>
