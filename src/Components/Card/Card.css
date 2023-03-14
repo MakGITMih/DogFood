@@ -4,8 +4,6 @@
     flex-direction: column;
     justify-content: space-between;
     padding: 10px;
-    /* margin-top: 40px; */
-    /* max-height: 359px; */
 }
 
 .card:hover {
@@ -45,26 +43,20 @@
 
 .card__nofavorit-icon{ 
     stroke: black;
-    /* opacity: 0.5; */
-    /* z-index: 10; */
 }
 
 .card__favorit-icon{ 
-    fill:var(--sale-color); 
-    
+    fill:var(--sale-color);   
 }
 
-.card__desc {
-    
-}
 .card__link {
     display: flex;
     flex-direction: column;
 }
+
 .card__pic{
     max-width: 100%;
 }
-
 
 .card__price {
     font-weight: 800;
@@ -101,8 +93,7 @@
 }
 
 .card__wrap-btn { 
-    margin-top: 16px;
-    
+    margin-top: 16px;   
 }
 
 .card__btn:hover {

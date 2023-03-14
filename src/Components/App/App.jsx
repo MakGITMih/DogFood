@@ -4,10 +4,15 @@ import { useEffect, useState } from 'react';
 import { CardList } from '../CardList/CardList';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
-import { Main } from '../Main/Main';
 import './App.css'; 
-import  { Search }  from '../SearchInfo/SearchInfo';
-import api from '../Utils/Request';
+import  { SearchInfo }  from '../SearchInfo/SearchInfo';
+import api from '../../Utils/Request';
+import { ProductPages } from '../../ProductPages/ProductPages';
+import {Spinner} from '../Spinner/Spinner'
+import { Catalog } from '../../ProductPages/Catalog';
+import { Route,Routes } from 'react-router-dom';
+import { Product } from '../Product/Product';
+import { NoMatches } from '../../ProductPages/NoMatches';
 
 
 
@@ -66,17 +71,25 @@ function App() {
 
   return (
     <div className="App">
-      <Header user={currentUser} changeInput ={handleInput} onUpdateUser={handleUpdateUser}></Header>
+      <Header 
+        user={currentUser} 
+        changeInput ={handleInput} 
+        onUpdateUser={handleUpdateUser}>
+      </Header>
       <main className="main">
-        <Search searchText= {searchQuery} searchCount={cards.length}></Search>
-          <div className="main__container _container">          
-       <CardList data={cards} currentUser={currentUser} onProductLike={handleProductLike}></CardList>
-          </div>
+       <SearchInfo 
+         searchText= {searchQuery} 
+         searchCount={cards.length}>
+       </SearchInfo>     
+       <Routes>
+         <Route path='/' element = {
+         <Catalog cards={cards} currentUser={currentUser}
+         handleProductLike={handleProductLike}></Catalog>} ></Route>
+         <Route path='/product/:productId' element = {<ProductPages></ProductPages>} ></Route>
+         <Route path='*' element = {<NoMatches></NoMatches>}></Route>
+       </Routes> 
       </main>
-       <Main></Main>
        <Footer></Footer>
-
-
     </div>
   );
 }

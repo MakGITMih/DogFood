@@ -1,11 +1,10 @@
 import React from "react";
-import './Main.css'
+import './Spinner.css'
 
-
-export function Main (params) {
+export function Spinner () {
     return (
         <>
-        
+        <div className="spinner"></div>
                  
          </>
     )

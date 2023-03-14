@@ -1,7 +1,8 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import '../Card/Card.css'
 import {ReactComponent as Heart} from '../Images/heart.svg'
-// import '../data.json'
+
 
 
  export function Card ({ name,price,discount,wight,pictures,likes,currentUser,
@@ -25,13 +26,13 @@ import {ReactComponent as Heart} from '../Images/heart.svg'
             </div>         
         </div>
         <div className="card__desc">
-            <a href="#" className="card__link">
+            <Link to ={`/product/${_id}`} className="card__link">
                  <img src={pictures} alt="Тут где - то был товар..." className ="card__pic"/>
                  <span className={!! discount ? 'card__old-price' : 'card__price'}>{price}&nbsp;₽</span>
                  {!! discount && <span className="card__new-price">{discount_price}&nbsp;₽</span>}               
                  <span className="card__how">{wight}</span>
                  <p className="card__text">{name}</p>
-            </a>    
+            </Link>    
         </div>
         <div className="card__wrap-btn"> 
             <button className="card__btn">В корзину</button>

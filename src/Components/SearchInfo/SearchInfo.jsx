@@ -5,7 +5,7 @@ import './SearchInfo.css'
 
 
 
-export function Search ({searchText,searchCount}) {
+export function SearchInfo ({searchText,searchCount}) {
     return (
          searchText && 
          <section className="search _container">

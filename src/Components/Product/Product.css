@@ -1,0 +1,356 @@
+
+.product__btn {
+    margin-top: 36px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #7B8E98;
+}
+
+.product__block {
+   display: flex;  
+}
+
+.product__articles {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    color: #7B8E98;
+}
+
+.product__stars {
+    margin: 0px 18px;
+}
+
+.pictures {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+}
+
+.pictures__image {
+    position: relative;
+}
+
+.pictures__percent {
+    position: absolute;
+    max-width: 58px;
+    text-align: center;
+    padding: 2px 8px;
+    background-color: var(--sale-color);
+    font-weight: 800;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--base-color);
+    border-radius: 20px;
+}
+
+.pictures__img {
+  
+    max-width: 468px;
+    max-height: 468px;
+    /* object-fit: cover; */
+}
+
+.pictures__pic {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    margin: 0px 10px 10px 0px;
+    opacity: 0.3;     
+}
+
+.pictures__thumbnail {
+    max-width: 80px;
+    max-height: 80px;
+    margin: 0px 40px;  
+}
+
+.pictures__price{
+    font-weight: 800;
+    font-size: 20px;
+    line-height: 24px;
+}
+
+.pictures__old-price{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    text-decoration-line: line-through;
+}
+
+.pictures__new-price {
+    font-weight: 800;
+    font-size: 28px;
+    line-height: 32px;
+    color: var(--sale-color);
+}
+
+.pictures__wrap-basket {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pictures__counter {
+    flex: 1 1 50%;
+    display: flex;
+    max-width: 109px;
+    margin-top: 24px;
+    justify-content: center;
+    border: #7B8E98 solid 1px;
+    border-radius: 100px;
+}
+
+.pictures__minus {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 24px;
+}
+
+.pictures__zero {
+    margin: 10px 17px;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 24px;
+}
+
+.pictures__plus {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 21px;
+    line-height: 24px;
+}
+
+.pictures__wrap-btn{
+    display: flex;
+    flex: 1 1 50%;
+    max-width: 218px;
+    justify-content: center;
+    margin-top: 24px;
+    background-color: var(--bg-color);
+    border-radius: 55px
+}
+
+.pictures__btn {
+    cursor: pointer;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    background-color: var(--bg-color); 
+}
+
+.pictures__wrap-favorites {
+    display: flex;
+    align-items: center;
+    margin-top: 24px;
+}
+
+.pictures__icon-heart {
+    max-width: 16px;
+    max-height: 16px;
+    stroke: black;
+}
+
+.pictures__favorites-text {
+    margin-left: 11px;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color:var(--sorting-color);
+}
+
+.pictures__wrap-delivery {
+    display: flex;
+    margin-top: 24px;
+    padding: 12px 0px 0px 17px;
+    background: rgba(236, 239, 241, 0.5);
+    border-radius: 12px;
+}
+
+.pictures__icon-delivery {
+    max-width: 26px;
+    max-height: 21px;
+    fill: var(--sorting-color);
+}
+
+.pictures__delivery {
+    display: flex;
+    flex-direction: column;
+    margin-left: 17px ;
+}
+
+.pictures__title {
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    padding-bottom: 8px;
+}
+
+.pictures__courier {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin: 8px 0px;
+}
+
+.pictures__office {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+    margin-bottom: 12px;
+}
+
+.pictures__wrap-quality {
+    display: flex;  
+    margin-top: 8px;
+    background: rgba(236, 239, 241, 0.5);
+    border-radius: 12px;
+    padding: 8px 0px 0px 17px;
+}
+
+.pictures__icon-quality {
+    max-width: 23px;
+    max-height: 30px;
+    margin-bottom: 14px;
+}
+.pictures__quality {
+    margin: 8px 0px;
+    margin-left: 17px;
+   
+}
+
+.pictures__title-quality {   
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    margin-bottom: 8px;   
+}
+
+.pictures__text-quality {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;   
+}
+
+.description {
+    margin: 40px 0px;  
+}
+
+.description__wrap-title {
+    margin-bottom: 20px;
+}
+.description__title {
+    font-weight: 800;
+    font-size: 24px;
+    line-height: 28px;
+}
+
+.description__text {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.description__wrap-characteristic {
+    margin: 40px 0px;
+}
+
+.description__titles {
+    margin-bottom: 22px;
+}
+
+.description__wrap-weight {
+    display: flex;
+    margin-bottom: 22px;
+}
+
+.description__block-weight {
+    min-width: 140px;
+}
+
+.description__weight {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--sorting-color);
+}
+
+.description__border-weight {
+    margin-left: 5px;
+    color: var(--sorting-color);
+}
+
+.description__wrap-price {
+    display: flex;
+    margin-bottom: 22px;
+}
+
+.description__block-price { 
+    min-width: 140px;   
+}
+
+.description__price {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--sorting-color);   
+}
+
+.description__border-price {
+    margin-left: 5px;
+    color: var(--sorting-color);
+}
+
+.description__wrap-benefit {
+    display: flex;
+    margin-bottom: 22px;
+}
+
+.description__block-benefit {
+    min-width: 140px;
+}
+
+.description__benefit {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color: var(--sorting-color);
+}
+
+.description__border-benefit {
+    margin-left: 5px;
+    color: var(--sorting-color);
+    font-size: 16px;
+}
+
+.description__one-benefit {
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+.description__two-benefit {
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+.description__three-benefit {
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+.description__four-benefit {
+    margin-bottom: 12px;
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+.description__five-benefit {
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
