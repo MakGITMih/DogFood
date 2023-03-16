@@ -48,11 +48,15 @@ class Api {
 
 
 const config = {
-  baseUrl: 'https://api.react-learning.ru',
+  baseUrl:
+   'https://api.react-learning.ru',
+   
   headers: {
     'content-type': 'application/json',
     Authorization:
-      'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJmOTk5MmFlNWM0MGMxMGMxMWRmZTQiLCJpYXQiOjE2NDcyODY2ODEsImV4cCI6MTY3ODgyMjY4MX0.WHKXAErKZtY445yXecOFZsx981MuXicJti-okSY-tac',
+    'Bearer eyJhbGci0iJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEzMGFhNG FhMzk3MTIxODM5MDc4MzgiLCJncm91cCI6Imdyb3VwLTkiLCJpYXQiOjE2Nzg5Njk2Njks ImV4cCI 6MTcxMDUwNTY20X0.qgSzU910mfL4-xCb0X2GShmmNczrcJ8Nwoc9wmGxb1s',
+   
+      // 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2MjJmOTk5MmFlNWM0MGMxMGMxMWRmZTQiLCJpYXQiOjE2NDcyODY2ODEsImV4cCI6MTY3ODgyMjY4MX0.WHKXAErKZtY445yXecOFZsx981MuXicJti-okSY-tac',
   },
 };
 

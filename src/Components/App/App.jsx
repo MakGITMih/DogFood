@@ -80,7 +80,7 @@ function App() {
        <SearchInfo 
          searchText= {searchQuery} 
          searchCount={cards.length}>
-       </SearchInfo>     
+       </SearchInfo>    
        <Routes>
          <Route path='/' element = {
          <Catalog cards={cards} currentUser={currentUser}
