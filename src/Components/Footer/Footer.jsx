@@ -6,7 +6,7 @@ import Telegram from '../Images/telegram.svg'
 import Viber from '../Images/viber.svg'
 import Vk from '../Images/vk.svg'
 import Whatsapp from '../Images/whatsapp.svg'
-
+import { Link } from "react-router-dom";
 
 export function Footer () {
     return (
@@ -29,7 +29,7 @@ export function Footer () {
                 </div>
                 <div className="footer__wrap-subtitles-rigth" >
                          <span className="footer__catalog">Оплата и доставка</span>
-                         <span className="footer__stock">Часто спрашивают</span>
+                         <Link to ={'/faq'} ><span className="footer__stock">Часто спрашивают</span></Link>
                          <span className="footer__news">Обратная связь</span>
                          <span className="footer__reviews">Контакты</span>                       
                 </div>

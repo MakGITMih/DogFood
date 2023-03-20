@@ -1,12 +1,18 @@
 import React from 'react';
+import { useContext } from 'react';
 import { CardList } from '../Components/CardList/CardList';
+import { CardContext } from '../Context/CardContext';
+import { UserContext } from '../Context/UserContext';
 
 
 
 
 
 
-export function Catalog ({ cards, currentUser, handleProductLike }) {
+export function Catalog ({currentUser}) {
+
+  const { cards } = useContext(CardContext);
+  const { handleProductLike } = useContext(UserContext);
        
     return (
         <>

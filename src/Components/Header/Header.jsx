@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import './Header.css'
 // import '../Card/Card.jsx'
 import Logo from '../Images/logo.svg'
@@ -6,19 +6,22 @@ import Bag from '../Images/buy.svg'
 import Muzzle from '../Images/muzzle.svg'
 import Close from '../Images/close.svg'
 import {ReactComponent as Heart} from '../Images/heart.svg'
+import { Link } from "react-router-dom";
+import { CardContext } from "../../Context/CardContext";
 
 export function Header ({changeInput,user,onUpdateUser}) {
     const handleClickButtonEntry = (e) => {
         e.preventDefault();
         onUpdateUser({ about: 'Писатель', name: "Васисуалий" });
       };
+      const { favorites } = useContext(CardContext);  
     return(
       <header className="header">
             <div className="header__container _container">
                  <div className="header__wrap-logo">
-                    <a href="#" className="header__logo">
+                    <Link to={'/'}  className="header__logo">
                         <img className="header__logo-img" src={Logo} alt="Что то сломалось..."/>
-                    </a>
+                    </Link>
                 </div>
                 <div className="header__wrap-search" > 
                      <form action="#" className="header__search">                        
@@ -34,7 +37,10 @@ export function Header ({changeInput,user,onUpdateUser}) {
                          <span>{user?.about} </span>
                          <button className="header__entry" onClick={handleClickButtonEntry}>вход</button>
                          <div className="header__heart">
-                            <Heart className="header__heart-img"></Heart>
+                            <Link to ={'/favorites'}>
+                                 <Heart className="header__heart-img"></Heart>
+                                 {favorites.length !== 0 && (<span className='header__heart-counter'>{favorites.length}</span>)}
+                            </Link>
                          </div>
                          <div className="header__bag">
                             <img className="header__bag-img" src={Bag} alt="Что то сломалось..."/>
