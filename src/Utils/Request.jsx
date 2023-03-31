@@ -44,6 +44,12 @@ class Api {
           headers: this._headers
         }).then(onResponse)
       }
+      deleteProductById(idProduct) {
+        return fetch(`${this._baseUrl}/products/${idProduct}`, {
+            headers: this._headers,
+            method: 'DELETE',
+        }).then(onResponse)
+      }
 }
 
 

@@ -9,12 +9,13 @@ import {ReactComponent as Heart} from '../Images/heart.svg'
 import { Link } from "react-router-dom";
 import { CardContext } from "../../Context/CardContext";
 
-export function Header ({changeInput,user,onUpdateUser}) {
+export function Header ({changeInput,user,onUpdateUser, setActiveModal}) {
     const handleClickButtonEntry = (e) => {
         e.preventDefault();
         onUpdateUser({ about: 'Писатель', name: "Васисуалий" });
       };
-      const { favorites } = useContext(CardContext);  
+      const { favorites } = useContext(CardContext); 
+      
     return(
       <header className="header">
             <div className="header__container _container">
@@ -33,9 +34,14 @@ export function Header ({changeInput,user,onUpdateUser}) {
                 </div>
                 <div className="header__wrap-icons">
                     <div className="header__icon-container">
+                         <span style={{cursor:"pointer"}} onClick = {() => setActiveModal (true)}>Регистрация</span>
                          <span>{user?.name} </span>
                          <span>{user?.about} </span>
-                         <button className="header__entry" onClick={handleClickButtonEntry}>вход</button>
+                         <Link to ={'/form'}> 
+                         <button className="header__entry"
+                        //   onClick={handleClickButtonEntry}
+                          >вход</button>
+                         </Link>
                          <div className="header__heart">
                             <Link to ={'/favorites'}>
                                  <Heart className="header__heart-img"></Heart>

@@ -41,6 +41,7 @@
     height: 20px;
     flex-grow: 1; 
     padding-right: 10px;
+    border: none;
 }
 
 .header__search-btn{

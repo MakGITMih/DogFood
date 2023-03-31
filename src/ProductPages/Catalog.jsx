@@ -3,10 +3,7 @@ import { useContext } from 'react';
 import { CardList } from '../Components/CardList/CardList';
 import { CardContext } from '../Context/CardContext';
 import { UserContext } from '../Context/UserContext';
-
-
-
-
+import { Sort } from '../Components/Sort/Sort';
 
 
 export function Catalog ({currentUser}) {
@@ -16,7 +13,8 @@ export function Catalog ({currentUser}) {
        
     return (
         <>
-        <div className="main__container _container">          
+        <div className="main__container _container">
+        <Sort></Sort>       
        <CardList        
          data={cards} 
          currentUser={currentUser} 

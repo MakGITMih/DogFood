@@ -1,0 +1,22 @@
+
+.form__form{
+    display: flex;
+    flex-direction: column;   
+}
+
+.form__btn{
+    max-width: 356px;
+    margin-top: 24px; 
+    cursor: pointer;
+    padding: 10px 18px;
+    font-weight: 700;
+    font-size: 16px;
+    line-height: 20px;
+    text-align: center;
+    background-color: var(--bg-color);
+    border-radius: 55px   
+}
+
+.form__necessarily{
+    color:var(--sale-color);
+}
