@@ -1,0 +1,31 @@
+.wrap__modal{
+    width: 356px; 
+    /* height: 420px; */
+}
+
+.modal__password {
+    width :100%;
+}
+
+.modal__restore{
+    text-align: right;
+}
+
+.modal__restore-text{
+    color: var(--sorting-color);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 20px;
+}
+
+._modal__text-left{
+    text-align: left;
+}
+
+._modal__margin-bottom{
+    margin-bottom: 16px;
+}
+
+._modal__margin-top{
+    margin-top: 16px;
+}

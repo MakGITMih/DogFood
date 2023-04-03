@@ -74,6 +74,10 @@
 
 .header__entry{
     cursor: pointer;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 20px;
+    margin: 0px 5px;
 }
 
 .header__heart{
@@ -105,6 +109,7 @@
 
 .header__bag{
     padding-left: 24px;
+    cursor: pointer;
 }
 
 .header__bag-img{
@@ -114,6 +119,7 @@
 
 .header__muzzle{
     padding-left: 24px; 
+    cursor: pointer;
 }
 
 .header__muzzle-img{

@@ -21,7 +21,7 @@ import {ReactComponent as Heart} from '../Images/heart.svg'
             {!!discount &&  <span className="card__percent">-{discount}%</span>}                         
             <div className="card__logo">
                 <button className="card__favorit" onClick={handleLikeClick}>
-                        <Heart className ={ liked ? "card__favorit-icon" : 'card__nofavorit-icon' }></Heart>
+                        <Heart className = { liked ? "card__favorit-icon" : 'card__nofavorit-icon'}></Heart>                      
                 </button> 
             </div>         
         </div>

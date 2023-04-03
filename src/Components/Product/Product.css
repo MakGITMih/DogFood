@@ -145,12 +145,17 @@
     display: flex;
     align-items: center;
     margin-top: 24px;
+    cursor: pointer;
 }
 
 .pictures__icon-heart {
     max-width: 16px;
     max-height: 16px;
     stroke: black;
+}
+
+._activ {
+    fill: var(--sale-color);
 }
 
 .pictures__favorites-text {

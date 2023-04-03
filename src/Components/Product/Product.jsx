@@ -7,6 +7,7 @@ import {ReactComponent as Truck} from '../Images/truck.svg'
 import {ReactComponent as Union} from '../Images/union.svg'
 
 export function Product ({
+    handleProductLike,
     _id, 
     pictures,
     name,
@@ -65,10 +66,13 @@ export function Product ({
                                  <button className="pictures__btn">В корзину</button>
                              </div>                 
                          </div>
-                         <div className="pictures__wrap-favorites"> 
-                            <Heart className="pictures__icon-heart"></Heart>                   
+                         <button onClick={onProductLike} className="pictures__wrap-favorites"> 
+                            <Heart className={`'pictures__icon-heart' ${isLike ? '_activ' : 'pictures__icon-heart'}`}
+                            // 'pictures__icon-heart'
+                            >
+                            </Heart>                   
                              <span className="pictures__favorites-text">{isLike ? 'В избранном' : 'В избранное'}</span>
-                         </div>
+                         </button>
                          <div className="pictures__wrap-delivery">
                              <Truck className="pictures__icon-delivery"></Truck>                 
                              <div className="pictures__delivery">

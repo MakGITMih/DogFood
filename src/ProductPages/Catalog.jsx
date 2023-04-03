@@ -18,7 +18,7 @@ export function Catalog ({currentUser}) {
        <CardList        
          data={cards} 
          currentUser={currentUser} 
-         onProductLike={handleProductLike}>        
+         onProductLike={handleProductLike}>   
        </CardList>
           </div>
         </>

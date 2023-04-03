@@ -1,25 +1,23 @@
 
 import { useEffect, useState } from 'react';
-import { CardList } from '../CardList/CardList';
 import { Footer } from '../Footer/Footer';
 import { Header } from '../Header/Header';
 import './App.css'; 
 import  { SearchInfo }  from '../SearchInfo/SearchInfo';
 import api from '../../Utils/Request';
 import { ProductPages } from '../../ProductPages/ProductPages';
-import {Spinner} from '../Spinner/Spinner'
 import { Catalog } from '../../ProductPages/Catalog';
 import { Route,Routes } from 'react-router-dom';
-import { Product } from '../Product/Product';
 import { NoMatches } from '../../ProductPages/NoMatches';
 import { Faq } from '../../ProductPages/Faq';
 import {Favorites} from '../../ProductPages/Favorites'
 import { CardContext } from '../../Context/CardContext';
 import { UserContext } from '../../Context/UserContext';
 import { isLiked } from '../../Utils/Utils';
-import { Form } from '../Form/Form';
-import { RegistrationForm } from '../Form/RegistrationForm';
 import { Modal } from '../Modal/Modal';
+import { Login } from '../Login/Login';
+import { Register } from '../Register/Register';
+import { ResetPass } from '../ResetPass/ResetPass';
 
 function App() {
    const[cards,setCards]=useState([]);
@@ -72,6 +70,7 @@ function App() {
 
   function handleProductLike(product) {
     const liked = isLiked(product.likes, currentUser?._id);
+    console.log({liked});
     
     api.changeLikeProduct(product._id, liked).then((newCard) => {
       const newProducts = cards.map((cardState) => {
@@ -98,6 +97,11 @@ function App() {
       case 'discount': setCards([...cards.sort((a,b)=> b.discount- a.discount)]);  break;
       default:
         setCards([...cards.sort((a,b)=> a.price - b.price )]);
+        break;
+        case 'rating':
+        setCards([
+          ...cards.sort((a, b) => b?.reviews?.length - a?.reviews?.length),
+        ]);
         break;
     }
     
@@ -165,7 +169,6 @@ function App() {
         changeInput ={handleInput} 
         onUpdateUser={handleUpdateUser}>
       </Header>
-      <Modal activeModal ={activeModal} setActiveModal={setActiveModal}><div style={{ width: '356px', height: '420px' }}><RegistrationForm addContact ={addContact}></RegistrationForm></div></Modal>
       <main className="main">     
        <SearchInfo 
          searchText= {searchQuery} 
@@ -179,6 +182,21 @@ function App() {
          <Route path='/faq' element = {<Faq></Faq>}></Route>
          <Route path='/favorites' element = {<Favorites></Favorites>}></Route>
          <Route path='*' element = {<NoMatches></NoMatches>}></Route>
+         <Route path='/login' element={
+                  <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                    <Login ></Login>
+                  </Modal>}>
+          </Route>
+          <Route path='/register' element={
+                  <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                  <Register ></Register>
+                </Modal>}>
+          </Route> 
+          <Route path='/resetpass' element={
+                  <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                  <ResetPass></ResetPass>
+                </Modal>}>
+          </Route>                       
        </Routes> 
       </main>
        <Footer></Footer>
