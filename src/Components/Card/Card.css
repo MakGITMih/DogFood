@@ -39,6 +39,7 @@
 .card__favorit {
     cursor: pointer;
     background: none;
+    
 }
 
 .card__nofavorit-icon{ 

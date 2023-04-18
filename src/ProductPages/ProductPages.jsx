@@ -10,8 +10,6 @@ import { CardContext } from "../Context/CardContext";
 
 export function ProductPages () {
 
-    // const[cards,setCards]=useState([]);
-    // const [searchQuery,setSearchQuery]=useState('');
     const [currentUser, setCurrentUser] = useState('');
     const[isLoading,setIsLoading] = useState (false);
     const[product,setProduct] = useState(null)
@@ -25,11 +23,8 @@ export function ProductPages () {
       setProduct({ ...product });
     };
 
-    // const onProductLike = () => {}; 
     const { productId } = useParams();
 
-      // console.log(productId);
-   
      useEffect (() => {
             setIsLoading (true);
             api.getUserInfo().then((userData) => setCurrentUser(userData));
@@ -38,16 +33,7 @@ export function ProductPages () {
             .then((productData) => setProduct(productData))
             .catch((err) => console.log('err',err))
             .finally(() => setIsLoading (false));       
-        },[productId,favorites]); 
-      
- 
-    function handleUpdateUser(userUpdateData) {
-     api
-        .setUserInfo(userUpdateData)
-        .then((newUser) => {
-        setCurrentUser(newUser);
-     });
-   }
+        },[productId,favorites]);     
         
     return (
       <main className="main">

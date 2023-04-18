@@ -1,4 +1,4 @@
-import React, { Children, useState } from "react";
+
 import '../Form/Form.css'
 
 
@@ -7,8 +7,6 @@ import '../Form/Form.css'
 
 
 export function Form ({title, handleFormSubmit,children}) {
- console.log(children)
-
 
     return (
      <>

@@ -7,8 +7,6 @@ import {ReactComponent as Truck} from '../Images/truck.svg'
 import {ReactComponent as Union} from '../Images/union.svg'
 
 export function Product ({
-    handleProductLike,
-    _id, 
     pictures,
     name,
     price,
@@ -68,7 +66,6 @@ export function Product ({
                          </div>
                          <button onClick={onProductLike} className="pictures__wrap-favorites"> 
                             <Heart className={`'pictures__icon-heart' ${isLike ? '_activ' : 'pictures__icon-heart'}`}
-                            // 'pictures__icon-heart'
                             >
                             </Heart>                   
                              <span className="pictures__favorites-text">{isLike ? 'В избранном' : 'В избранное'}</span>
@@ -96,7 +93,7 @@ export function Product ({
                              <h2 className="description__title">Описание</h2>
                          </div>
                          <div className="description__wrap-text">
-                            <p className="description__text"dangerouslySetInnerHTML=     {desctiptionHTML}></p>
+                            <p className="description__text"dangerouslySetInnerHTML={desctiptionHTML}></p>
                          </div>
                      </div>
                      <div className="description__wrap-characteristic">

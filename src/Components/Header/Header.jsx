@@ -26,16 +26,18 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal}) {
       <header className="header">
             <div className="header__container _container">
                  <div className="header__wrap-logo">
-                   <div className="header__logo">
-                        <img onClick={handleClick} className="header__logo-img" src={Logo} alt="Что то сломалось..."  />
-                        </div> 
+                 <Link to ={'/'}>
+                   <div  className="header__logo">
+                        <img className="header__logo-img" src={Logo} alt="Что то сломалось..."/>
+                     </div> 
+                  </Link>     
                 </div>
                 <div className="header__wrap-search" > 
                      <form action="#" className="header__search">                        
-                         <input className="header__search-input" type="text" autoFocus placeholder="Поиск" onInput={changeInput}></input>                                                
-                         <button type="submit" className="header__search-btn">
-                            <div className="header__wrap-close"><img className="header__close-img" src={Close} alt="Что то сломалось..."/></div>
-                        </button>                         
+                         <input className="header__search-input" type="text" autoFocus placeholder="Поиск" onInput={changeInput}></input>                                             
+                         <button type="submit " className="header__search-btn">             
+                            <div className="header__wrap-close"><img onClick={handleClick} className="header__close-img" src={Close} alt="Что то сломалось..."/></div>                           
+                        </button>                                              
                      </form>
                 </div>
                 <div className="header__wrap-icons">
@@ -64,11 +66,11 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal}) {
                             <img className="header__bag-img" src={Bag} alt="Что то сломалось..."/>
                          </button>
                          </Link>
-                         <Link to ={'/form'}>
+                         {/* <Link to ={'/form'}>
                          <button className="header__muzzle" >
-                            <img className="header__muzzle-img" src={Muzzle} alt="Что то сломалось..."/>
+                            <img  className="header__muzzle-img" src={Muzzle} alt="Что то сломалось..."/>
                         </button>
-                        </Link>
+                        </Link> */}
                      </div>
                 </div>               
             </div>

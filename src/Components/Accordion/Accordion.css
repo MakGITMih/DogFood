@@ -3,6 +3,10 @@
 	flex-direction: column;
 	border-bottom: 1px solid #ECEFF1;
 } */
+.faq{
+	margin-top: 28px;
+	margin-bottom: 55px;
+}
 
 .faq__button {
 	background-color: transparent;

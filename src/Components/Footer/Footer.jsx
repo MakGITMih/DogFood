@@ -15,9 +15,11 @@ export function Footer () {
             <div className="footer__container _container">
                 <div className="footer__wrap-logo">
                     <div className="footer__logo">
-                         <a href="#" className="header__logo">
-                             <img className="header__logo-img" src={Logo} alt="Что то сломалось..."/>
-                         </a>
+                    <Link to ={'/'}>
+                   <div  className="header__logo">
+                        <img className="header__logo-img" src={Logo} alt="Что то сломалось..."/>
+                     </div> 
+                  </Link>     
                     </div>
                     <span className="footer__text"> © «Интернет-магазин DogFood.ru»</span> 
                 </div>

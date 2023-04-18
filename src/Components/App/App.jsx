@@ -70,7 +70,7 @@ function App() {
 
   function handleProductLike(product) {
     const liked = isLiked(product.likes, currentUser?._id);
-    console.log({liked});
+    // console.log({liked});
     
     api.changeLikeProduct(product._id, liked).then((newCard) => {
       const newProducts = cards.map((cardState) => {
@@ -129,7 +129,6 @@ function App() {
   const valueProvider = {
     cards,
     favorites,
-    // setCurrentSort(id);
     onSortData:sortedData
   };
 
@@ -137,10 +136,10 @@ function App() {
     handleProductLike: handleProductLike,
   };
 
-  const addContact = (contact) => {
-    setContacts([...contacts, contact]);
-    // api.createContact(contact)
-  };
+  // const addContact = (contact) => {
+  //   setContacts([...contacts, contact]);
+  //   api.createContact(contact)
+  // };
 
                         //   Удаление мусорных товаров по полю ('default-image')
   // useEffect(() => {
@@ -175,25 +174,23 @@ function App() {
          searchCount={cards.length}>
        </SearchInfo>    
        <Routes>
-         <Route path='/' element = {
-         <Catalog cards={cards} currentUser={currentUser}
-         handleProductLike={handleProductLike}></Catalog>} ></Route>
+         <Route path='/' element = {<Catalog currentUser={currentUser}></Catalog>} ></Route>
          <Route path='/product/:productId' element = {<ProductPages></ProductPages>} ></Route>
          <Route path='/faq' element = {<Faq></Faq>}></Route>
-         <Route path='/favorites' element = {<Favorites></Favorites>}></Route>
+         <Route path='/favorites' element = {<Favorites currentUser={currentUser}></Favorites>}></Route>
          <Route path='*' element = {<NoMatches></NoMatches>}></Route>
          <Route path='/login' element={
-                  <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-                    <Login ></Login>
-                  </Modal>}>
+              <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                <Login ></Login>
+              </Modal>}>
           </Route>
           <Route path='/register' element={
-                  <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
                   <Register ></Register>
                 </Modal>}>
           </Route> 
           <Route path='/resetpass' element={
-                  <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
                   <ResetPass></ResetPass>
                 </Modal>}>
           </Route>                       

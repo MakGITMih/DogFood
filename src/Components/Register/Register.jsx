@@ -3,7 +3,7 @@ import { Form } from "../Form/Form";
 import '../Login/Login.css'
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEXP, PASS_REGEXP, VALIDATE_CONFIG } from "../Constants/Constants";
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -39,7 +39,8 @@ export function Register () {
         console.log({ data });
       };
 
-
+      const navigate = useNavigate();
+      
     return (
          <>
          <Form handleFormSubmit={handleSubmit(sendData)} title='Регистрация'>
@@ -66,7 +67,7 @@ export function Register () {
                 <span className="modal__restore-text ">Регистрируясь на сайте, вы соглашаетесь с нашими Правилами и Политикой конфиденциальности и соглашаетесь на информационную рассылку.</span>
             </p>
             <button type="submit" className="modal__password form__btn" >Зарегистрироваться</button>
-            <button type="button" onClick={() =>('#')} className="modal__password  form__btn-white" >Войти</button>
+            <button type="button" onClick={() => navigate('/login')} className="modal__password  form__btn-white" >Войти</button>
         </div>
          </Form>
          </>

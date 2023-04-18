@@ -6,7 +6,7 @@ import { UserContext } from '../Context/UserContext';
 import { useNavigate } from "react-router-dom";
 import '../Components/Card/Card.css'
 
-export function Favorites () {
+export function Favorites ({currentUser}) {
     const { favorites } = useContext(CardContext);
     const { handleProductLike } = useContext(UserContext);
 
@@ -22,15 +22,14 @@ export function Favorites () {
              <h1 className='favorites__title'>Избранное</h1>       
              <div> 
                   <div className="favorites__card">                                             
-                     <CardList 
-                          data={favorites} 
+                     <CardList                          
+                          data={favorites}
+                          currentUser={currentUser}
                           onProductLike={handleProductLike}>                         
                      </CardList>
                   </div>
             </div>
           </div>
         </>
-        
     );
-    
 };

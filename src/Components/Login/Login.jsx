@@ -3,7 +3,7 @@ import { Form } from "../Form/Form";
 import '../Login/Login.css'
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEXP, PASS_REGEXP, VALIDATE_CONFIG } from "../Constants/Constants";
-
+import { useNavigate } from 'react-router-dom';
 
 
 
@@ -39,6 +39,8 @@ export function Login () {
         console.log({ data });
       };
 
+      const navigate = useNavigate();
+
 
     return (
          <>
@@ -63,10 +65,10 @@ export function Login () {
             <p className='form__necessarily'>{errors?.password?.message}</p>
           )}
             <p className="modal__restore" onClick={() =>('#')} >
-                <span className="modal__restore-text">Восстановить пароль</span>
+                <span className="modal__restore-text _pointer" onClick={() => navigate('/resetpass')}>Восстановить пароль</span>
             </p>
             <button type="submit" className="modal__password form__btn" >Войти</button>
-            <button type="button" onClick={() =>('#')} className="modal__password  form__btn-white" >Регистрация</button>
+            <button type="button" className="modal__password  form__btn-white" onClick={() => navigate('/register')} >Регистрация</button>
         </div>
          </Form>
          </>
