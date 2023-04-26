@@ -5,6 +5,8 @@ import {ReactComponent as Glass} from '../Images/glass.svg'
 import {ReactComponent as Heart} from '../Images/heart.svg'
 import {ReactComponent as Truck} from '../Images/truck.svg'
 import {ReactComponent as Union} from '../Images/union.svg'
+import {ReactComponent as Star} from '../Images/starFill.svg'
+import { Rating } from "../Rating/Rating";
 
 export function Product ({
     pictures,
@@ -36,6 +38,7 @@ export function Product ({
                      <div className="product__block">
                          <div className="product__articles">Артикул: <b>238793</b></div>
                          <div className="product__stars" >Звезды </div> 
+                         <Rating></Rating>
                          <div className="product__reviews">Отзывы</div> 
                      </div>
                 </div>

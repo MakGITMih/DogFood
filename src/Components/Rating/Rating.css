@@ -1,0 +1,8 @@
+.filled {
+    fill: var(--bg-color);
+    stroke: var(--bg-color);
+}
+.no-filled {
+    fill: var(--base-color);
+    stroke: var(--bg-color);
+}
