@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import '../Product/Product.css'
 import { Link, useLocation, useNavigate, useParams } from "react-router-dom";
 import {ReactComponent as Glass} from '../Images/glass.svg'
@@ -7,6 +7,7 @@ import {ReactComponent as Truck} from '../Images/truck.svg'
 import {ReactComponent as Union} from '../Images/union.svg'
 import {ReactComponent as Star} from '../Images/starFill.svg'
 import { Rating } from "../Rating/Rating";
+import api from '../../Utils/Request'
 
 export function Product ({
     pictures,
@@ -16,18 +17,39 @@ export function Product ({
     onProductLike,
     likes = [],
     currentUser,
-    description,}) {
+    description,
+    reviews, }) {
 
      const discount_price = Math.round(price - (price * discount) / 100);
      const isLike = likes.some((id) => id === currentUser?._id);
      const desctiptionHTML = { __html: description };
+     const [users, setUsers] = useState([]);
 
      let navigate = useNavigate();
      const handleClick = () => {
         navigate('/');
       };
 
+      useEffect(() => {
+        api.getUsers().then((data) => setUsers(data));
+      }, []);
     
+      const getUser = (id) => {
+        if (!users.length) return 'User';
+        const user = users.find((el) => el._id === id);
+        console.log( {user} );
+        return user.name ?? 'User'
+        ;
+      };     
+
+      console.log( {reviews} );
+
+      const options = {
+        day: 'numeric',
+        month: 'short',
+        year: 'numeric',
+      };
+
     return (
          <>  
          <div className="product">
@@ -37,9 +59,8 @@ export function Product ({
                      <h1 className="product__name">{name}</h1>
                      <div className="product__block">
                          <div className="product__articles">Артикул: <b>238793</b></div>
-                         <div className="product__stars" >Звезды </div> 
-                         <Rating></Rating>
-                         <div className="product__reviews">Отзывы</div> 
+                         <div className="product__stars" ><Rating isEditable={true} rating={5}></Rating> </div> 
+                         <div className="product__reviews">{reviews?.length} Отзыва</div> 
                      </div>
                 </div>
                 <section className="pictures">
@@ -100,8 +121,8 @@ export function Product ({
                          </div>
                      </div>
                      <div className="description__wrap-characteristic">
-                        <div className="description__wrap-titles">
-                            <h2 className="description__titles">Характеристики</h2>
+                        <div className="description__wrap-title">
+                            <h2 className="description__title">Характеристики</h2>
                         </div>
                         <div className="description__wrap-text">
                             <div className="description__wrap-headline">
@@ -135,6 +156,30 @@ export function Product ({
                             </div>
                         </div>
                      </div>
+                </section>
+                <section className="reviews">
+                    <div className="reviews__wrap-title">                  
+                         <h2 className="reviews__title">Отзывы</h2>
+                         <button className="reviews__btn">Написать отзыв</button>
+                    </div>
+                   <div className="reviews__wrap-reviews">
+                     {reviews?.map((e) => 
+                     <div className="">
+                         <div className="reviews__wrap-user">
+                             <span className="reviews__user">{getUser(e.author._id)}</span>
+                             <span className="reviews__data">{new Date(e.created_at).toLocaleString('ru', options)}</span>
+                         </div>
+                         <div className="reviews__rating">
+                             <Rating rating={e.rating}></Rating> 
+                         </div>
+                         <div className="reviews__wrap-where">
+                               <span className="reviews__where">откуда</span>
+                         </div>
+                         <div className="reviews__wrap-text">
+                             <span className="reviews__text">{e.text}</span>
+                         </div>                 
+                     </div>)}                  
+                   </div>
                 </section>
             </div>
          </div>       

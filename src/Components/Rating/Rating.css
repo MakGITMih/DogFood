@@ -1,8 +1,10 @@
 .filled {
-    fill: var(--bg-color);
-    stroke: var(--bg-color);
+    fill: var(--star-color);
+    stroke: var(--star-color);
+    /* cursor: pointer; */
 }
 .no-filled {
     fill: var(--base-color);
     stroke: var(--bg-color);
+    /* cursor: pointer; */
 }

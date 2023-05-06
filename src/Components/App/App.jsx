@@ -7,7 +7,7 @@ import  { SearchInfo }  from '../SearchInfo/SearchInfo';
 import api from '../../Utils/Request';
 import { ProductPages } from '../../ProductPages/ProductPages';
 import { Catalog } from '../../ProductPages/Catalog';
-import { Route,Routes } from 'react-router-dom';
+import { Route,Routes, useNavigate } from 'react-router-dom';
 import { NoMatches } from '../../ProductPages/NoMatches';
 import { Faq } from '../../ProductPages/Faq';
 import {Favorites} from '../../ProductPages/Favorites'
@@ -27,6 +27,7 @@ function App() {
    const [favorites, setFavorites] = useState([]);
    const [contacts, setContacts] = useState([]);
    const [activeModal, setActiveModal] = useState(false);
+   const navigate = useNavigate();
 
    function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);  
@@ -42,6 +43,7 @@ function App() {
       .search(searchQuery)
       .then((res) => setCards(res))
       .catch((err) => console.log(err));
+      navigate('/');
       },[debounceSearch]);
 
    const handleInput = (e) => {setSearchQuery(e.target.value);}
@@ -70,7 +72,6 @@ function App() {
 
   function handleProductLike(product) {
     const liked = isLiked(product.likes, currentUser?._id);
-    // console.log({liked});
     
     api.changeLikeProduct(product._id, liked).then((newCard) => {
       const newProducts = cards.map((cardState) => {

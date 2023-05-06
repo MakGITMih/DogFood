@@ -1,5 +1,6 @@
 import React from "react";
 import './SearchInfo.css'
+import { useLocation } from "react-router-dom";
 
 
 

@@ -34,7 +34,9 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal}) {
                 </div>
                 <div className="header__wrap-search" > 
                      <form action="#" className="header__search">                        
-                         <input className="header__search-input" type="text" autoFocus placeholder="Поиск" onInput={changeInput}></input>                                             
+                         <input className="header__search-input" type="text" autoFocus placeholder="Поиск" onInput={changeInput} 
+                        //  onClick={handleClick}
+                         ></input>                                             
                          <button type="submit " className="header__search-btn">             
                             <div className="header__wrap-close"><img onClick={handleClick} className="header__close-img" src={Close} alt="Что то сломалось..."/></div>                           
                         </button>                                              
@@ -43,7 +45,9 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal}) {
                 <div className="header__wrap-icons">
                     <div className="header__icon-container">
                          <Link to ={'/register'}>
-                            <span className="header__entry" onClick = {() => setActiveModal (true)}>Регистрация</span>
+                            <span className="header__entry"
+                            onClick = {() => setActiveModal (true)}
+                            >Регистрация</span>
                          </Link>
                          {/* <span>{user?.name} </span>
                          <span>{user?.about} </span> */}

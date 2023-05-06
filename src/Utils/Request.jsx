@@ -50,6 +50,16 @@ class Api {
             method: 'DELETE',
         }).then(onResponse)
       }
+      getUsersById(userId) {
+        return fetch(`${this._baseUrl}/v2/group-9/users/${userId}`, {
+          headers: this._headers,
+        }).then(onResponse); 
+      }
+      getUsers() {
+        return fetch(`${this._baseUrl}/v2/group-9/users`, {
+          headers: this._headers,
+        }).then(onResponse);
+      }
 }
 
 
