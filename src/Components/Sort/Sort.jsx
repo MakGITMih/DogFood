@@ -1,10 +1,11 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { CardContext } from "../../Context/CardContext";
 import '../Sort/Sort.css'
 
 
 export function Sort () {
-    const { onSortData }= useContext(CardContext);
+    const { onSortData, }= useContext(CardContext);
+    const [sortedId, setSortedId] = useState('newest');
     const tabs = [
         { id: 'popular', title: 'Популярные' },
         { id: 'newest', title: 'Новинки' },
@@ -14,15 +15,22 @@ export function Sort () {
         { id: 'discount', title: 'По скидке' },  
       ];
 
-      const handleChange = (id) => {onSortData(id);};
+      const handleChange = (id) => {
+        onSortData(id);
+        setSortedId(id);
+      };
 
     return (  
          <>
          <div className="sort">
              {tabs.map(({id, title}) => (
-             <div className="sort__link" onClick={() => handleChange(id)}>{title}</div>
+            <span className={`sort__link ${id === sortedId ? 'sort__link_selected' : ''} `}
+            onClick={() => handleChange(id)}>
+                 {title}
+             </span>
              ))}
          </div>        
          </>   
     )    
 };
+

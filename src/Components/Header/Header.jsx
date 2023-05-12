@@ -5,20 +5,22 @@ import Bag from '../Images/buy.svg'
 import Muzzle from '../Images/muzzle.svg'
 import Close from '../Images/close.svg'
 import {ReactComponent as Heart} from '../Images/heart.svg'
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CardContext } from "../../Context/CardContext";
 
-export function Header ({changeInput,user,onUpdateUser, setActiveModal}) {
+
+export function Header ({changeInput,user,onUpdateUser, setActiveModal,}) {
     // const handleClickButtonEntry = (e) => {
     //     e.preventDefault();
     //     onUpdateUser({ about: 'Писатель', name: "Васисуалий" });
     //   };
       const { favorites } = useContext(CardContext); 
+      const location = useLocation();
 
-      let navigate = useNavigate();
-     const handleClick = () => {
-        navigate('/');
-      };
+   //    let navigate = useNavigate();
+   //   const handleClick = () => {
+   //      navigate('/');
+   //    };
 
 
       
@@ -38,26 +40,30 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal}) {
                         //  onClick={handleClick}
                          ></input>                                             
                          <button type="submit " className="header__search-btn">             
-                            <div className="header__wrap-close"><img onClick={handleClick} className="header__close-img" src={Close} alt="Что то сломалось..."/></div>                           
+                            <div className="header__wrap-close"><img
+                           //   onClick={handleClick}
+                              className="header__close-img" src={Close} alt="Что то сломалось..."/></div>                           
                         </button>                                              
                      </form>
                 </div>
                 <div className="header__wrap-icons">
                     <div className="header__icon-container">
-                         <Link to ={'/register'}>
-                            <span className="header__entry"
-                            onClick = {() => setActiveModal (true)}
-                            >Регистрация</span>
+                         <Link to ={'/register'}
+                            state = {{backgroundLocation: location, initialPath: location.   pathname}} 
+                            onClick = {() => setActiveModal (true)}>
+                                  <span className="header__entry">Регистрация</span>
                          </Link>
                          {/* <span>{user?.name} </span>
                          <span>{user?.about} </span> */}
-                         <Link to ={'/login'}>
-                            <span className="header__entry" onClick = {() => setActiveModal (true)}
-                            >Вход</span>
-                          </Link>
-                          <Link to ={'/resetpass'}>
-                            <span className="header__entry" onClick = {() => setActiveModal (true)}
-                            >Восстановить</span>
+                         <Link to ={'/login'} 
+                            state = {{backgroundLocation: location, initialPath: location.   pathname}} 
+                            onClick = {() => setActiveModal (true)}>
+                                  <span className="header__entry">Вход</span>
+                         </Link>
+                          <Link to ={'/resetpass'}
+                            state = {{backgroundLocation: location, initialPath:  location.   pathname}} 
+                            onClick = {() => setActiveModal (true)}>
+                                  <span className="header__entry" >Восстановить</span>
                           </Link>
                          <div className="header__heart" >
                             <Link to ={'/favorites'}>

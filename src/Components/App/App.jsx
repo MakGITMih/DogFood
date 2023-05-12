@@ -18,6 +18,7 @@ import { Modal } from '../Modal/Modal';
 import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { ResetPass } from '../ResetPass/ResetPass';
+import { useLocation } from 'react-router-dom';
 
 function App() {
    const[cards,setCards]=useState([]);
@@ -28,6 +29,8 @@ function App() {
    const [contacts, setContacts] = useState([]);
    const [activeModal, setActiveModal] = useState(false);
    const navigate = useNavigate();
+   
+   
 
    function useDebounce(value, delay) {
     const [debouncedValue, setDebouncedValue] = useState(value);  
@@ -88,9 +91,8 @@ function App() {
     });
   }
 
-  const sortedData = (currenSort) => {
-     console.log({ currenSort });
-     switch (currenSort) {
+  const sortedData = (currentSort) => {
+     switch (currentSort) {
       case 'expensive': setCards([...cards.sort((a,b)=> b.price - a.price )]);  break;
       case 'cheep': setCards([...cards.sort((a,b)=> a?.price - b?.price )]);  break;
       case 'newest': setCards([...cards.sort((a,b)=> new Date(b?.created_at) - new Date(a?.created_at) )]);  break;
@@ -127,10 +129,10 @@ function App() {
     // }                          
   }
 
-  const valueProvider = {
+  const cardProvider = {
     cards,
     favorites,
-    onSortData:sortedData
+    onSortData:sortedData,
   };
 
   const userProvider = {
@@ -158,10 +160,46 @@ function App() {
   //   console.log({ filteredCards });
   // }, []);
 
+  // const location = useLocation();
+ 
+  const location = useLocation();
+  const backgroundLocation = location.state?.backgroundLocation;
+  const initialPath = location.state?.initialPath;
+
+  // const authRoutes = (
+  //   <>
+  //     <Route
+  //       path='/login'
+  //       element={
+  //         <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+  //           <Login />
+  //         </Modal>
+  //       }
+  //     ></Route>
+  //     <Route
+  //       path='/register'
+  //       element={
+  //         <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+  //           <Register />
+  //         </Modal>
+  //       }
+  //     ></Route>
+  //     <Route
+  //       path='/reset-pass'
+  //       element={
+  //         <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+  //           <ResetPassword />
+  //         </Modal>
+  //       }
+  //     ></Route>
+  //   </>
+  // );
+
+  
 
   return (
     <div className="App">      
-      <CardContext.Provider value={valueProvider}>
+      <CardContext.Provider value={cardProvider}>
       <UserContext.Provider value={userProvider}>
       <Header 
         setActiveModal ={setActiveModal}
@@ -174,18 +212,18 @@ function App() {
          searchText= {searchQuery} 
          searchCount={cards.length}>
        </SearchInfo>    
-       <Routes>
+       <Routes location={backgroundLocation && {...backgroundLocation, path: initialPath || location}}>
          <Route path='/' element = {<Catalog currentUser={currentUser}></Catalog>} ></Route>
          <Route path='/product/:productId' element = {<ProductPages></ProductPages>} ></Route>
          <Route path='/faq' element = {<Faq></Faq>}></Route>
          <Route path='/favorites' element = {<Favorites currentUser={currentUser}></Favorites>}></Route>
          <Route path='*' element = {<NoMatches></NoMatches>}></Route>
-         <Route path='/login' element={
+          {/* <Route path='/login' element={
               <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
                 <Login ></Login>
               </Modal>}>
-          </Route>
-          <Route path='/register' element={
+          </Route> */}
+          {/* <Route path='/register' element={
                 <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
                   <Register ></Register>
                 </Modal>}>
@@ -194,8 +232,28 @@ function App() {
                 <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
                   <ResetPass></ResetPass>
                 </Modal>}>
-          </Route>                       
+          </Route>                         */}
+          
        </Routes> 
+
+        {backgroundLocation && <Routes>
+            <Route path='/login' element={
+                 <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                     <Login ></Login>
+                 </Modal>}>
+            </Route>
+            <Route path='/register' element={
+                <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                  <Register ></Register>
+                </Modal>}>
+          </Route> 
+          <Route path='/resetpass' element={
+                <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
+                  <ResetPass></ResetPass>
+                </Modal>}>
+          </Route>                        
+         </Routes>}
+
       </main>
        <Footer></Footer>
        </UserContext.Provider>
