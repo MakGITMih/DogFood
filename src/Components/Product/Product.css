@@ -382,6 +382,29 @@
     border-radius: 87px;
     cursor: pointer;
 }
+
+.reviews__grade-text {
+     margin-right: 15px;
+}
+
+.reviews__wrap-form{
+    margin-bottom: 20px;
+}
+
+.reviews__textarea{
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    padding: 14px 16px;
+    border: 1px solid #CFD8DC;
+    background: var(--base-color);
+    border-radius: 12px;
+    min-width: 356px;
+    margin: 8px 0px;
+    resize: none;
+}
+
+
 .reviews__wrap-reviews {
 }
 .reviews__wrap-user {

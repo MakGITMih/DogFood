@@ -4,6 +4,7 @@ import '../Login/Login.css'
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEXP, PASS_REGEXP, VALIDATE_CONFIG } from "../Constants/Constants";
 import { useNavigate } from 'react-router-dom';
+import { authApi, registration } from "../../Utils/AuthApi";
 
 
 
@@ -35,8 +36,11 @@ export function Register () {
         },
       });
 
-      const sendData = (data) => {
+      const sendData = async (data) => {
         console.log({ data });
+        // await authApi.register({...data, group: 'group-9'});
+        await registration({...data, group: 'group-9'});
+
       };
 
       const navigate = useNavigate();

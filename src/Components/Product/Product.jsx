@@ -8,6 +8,9 @@ import {ReactComponent as Union} from '../Images/union.svg'
 import {ReactComponent as Star} from '../Images/starFill.svg'
 import { Rating } from "../Rating/Rating";
 import api from '../../Utils/Request'
+import { Form } from "../Form/Form";
+import { useForm } from 'react-hook-form';
+import { VALIDATE_CONFIG } from "../Constants/Constants";
 
 export function Product ({
     pictures,
@@ -26,9 +29,38 @@ export function Product ({
      const [users, setUsers] = useState([]);
 
      let navigate = useNavigate();
+
      const handleClick = () => {
         navigate('/');
       };
+
+      const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
+
+      const sendReview = (data) => {
+        console.log(data);
+        // onSendReview({ ...data, rating });
+        // setShowForm(false);
+      };
+
+    //   const reviewRegister = register('email', {
+    //     required: {
+    //       value: true,
+    //       message:
+    //        VALIDATE_CONFIG.requiredMessage,
+    //     },
+    //     pattern: {
+    //       value: EMAIL_REGEXP,
+    //       message: VALIDATE_CONFIG.email,
+    //     },
+    //   });
+
+      const reviewRegister = register('textarea', {
+        required: {
+          value: true,
+          message: VALIDATE_CONFIG.requiredMessage,
+        },
+        minLength: { value: 5, message: 'Минимум 5 символов' },
+      });
 
       useEffect(() => {
         api.getUsers().then((data) => setUsers(data));
@@ -37,7 +69,7 @@ export function Product ({
       const getUser = (id) => {
         if (!users.length) return 'User';
         const user = users.find((el) => el._id === id);
-        console.log( {user} );
+        // console.log( {user});
         return user.name ?? 'User'
         ;
       };     
@@ -161,6 +193,24 @@ export function Product ({
                     <div className="reviews__wrap-title">                  
                          <h2 className="reviews__title">Отзывы</h2>
                          <button className="reviews__btn">Написать отзыв</button>
+                         <Form handleFormSubmit={handleSubmit(sendReview)} title ='Написать отзыв'>
+                            <div className="reviews__grade">
+                         <span className="reviews__grade-text">Общая оценка</span> 
+                         <span className="reviews__grade-star"><Rating isEditable={true} rating={5}></Rating></span>
+                         </div>
+                            <div className="reviews__wrap-form">            
+                                 <textarea className="reviews__textarea"
+                                     {...reviewRegister}
+                                     type="text"
+                                     name="textarea"
+                                     placeholder="Поделитесь впечатлениями о товаре" 
+                                 />
+                                 {errors.textarea && (
+                                 <p className='form__necessarily'>{errors?.textarea?.message}</p>)}           
+                                 <button type="submit"                                className="modal__password form__btn"
+                                  >Отправить</button>
+                             </div>
+                         </Form>
                     </div>
                    <div className="reviews__wrap-reviews">
                      {reviews?.map((e) => 

@@ -3,15 +3,18 @@ import { Form } from "../Form/Form";
 import '../Login/Login.css'
 import { useForm } from "react-hook-form";
 import { EMAIL_REGEXP, PASS_REGEXP, VALIDATE_CONFIG } from "../Constants/Constants";
-import { useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { authApi } from "../../Utils/AuthApi";
-
+import { login } from "../../Utils/AuthApi";
 
 
 
 export function Login () {
  
     const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
+    const navigate = useNavigate();
+    // const location = useLocation(); 
+    // const initialPath = location.state?.initialPath;
 
     const emailRegister = register('email', {
         required: {
@@ -38,7 +41,8 @@ export function Login () {
 
       const sendData = async (data) => {
         try {
-        const result =  await authApi.login (data);
+        // const result =  await authApi.login (data);
+        const result = await login(data);
         localStorage.setItem(`token`, result.token);
         navigate('/')
       } catch (error) {
@@ -47,7 +51,7 @@ export function Login () {
     };
 
 
-      const navigate = useNavigate();
+     
 
 
     return (

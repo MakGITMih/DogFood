@@ -9,7 +9,7 @@ import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CardContext } from "../../Context/CardContext";
 
 
-export function Header ({changeInput,user,onUpdateUser, setActiveModal,}) {
+export function Header ({changeInput,user,onUpdateUser, setActiveModal,isAuthentificated}) {
     // const handleClickButtonEntry = (e) => {
     //     e.preventDefault();
     //     onUpdateUser({ about: 'Писатель', name: "Васисуалий" });
@@ -55,11 +55,13 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal,}) {
                          </Link>
                          {/* <span>{user?.name} </span>
                          <span>{user?.about} </span> */}
+                         {/* { !isAuthentificated &&  */}
                          <Link to ={'/login'} 
                             state = {{backgroundLocation: location, initialPath: location.   pathname}} 
                             onClick = {() => setActiveModal (true)}>
                                   <span className="header__entry">Вход</span>
                          </Link>
+                         {/* } */}
                           <Link to ={'/resetpass'}
                             state = {{backgroundLocation: location, initialPath:  location.   pathname}} 
                             onClick = {() => setActiveModal (true)}>

@@ -19,6 +19,7 @@ import { Login } from '../Login/Login';
 import { Register } from '../Register/Register';
 import { ResetPass } from '../ResetPass/ResetPass';
 import { useLocation } from 'react-router-dom';
+import { Chart } from '../Chart/Chart.jsx';
 
 function App() {
    const[cards,setCards]=useState([]);
@@ -27,7 +28,8 @@ function App() {
    const debounceSearch = useDebounce(searchQuery,1500);
    const [favorites, setFavorites] = useState([]);
    const [contacts, setContacts] = useState([]);
-   const [activeModal, setActiveModal] = useState(false);
+   const [activeModal, setActiveModal] = useState(true);
+   const [isAuthentificated, setAuthentificated] = useState(false);
    const navigate = useNavigate();
    
    
@@ -137,6 +139,7 @@ function App() {
 
   const userProvider = {
     handleProductLike: handleProductLike,
+    currentUser: currentUser,
   };
 
   // const addContact = (contact) => {
@@ -166,78 +169,14 @@ function App() {
   const backgroundLocation = location.state?.backgroundLocation;
   const initialPath = location.state?.initialPath;
 
-  // const authRoutes = (
-  //   <>
-  //     <Route
-  //       path='/login'
-  //       element={
-  //         <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-  //           <Login />
-  //         </Modal>
-  //       }
-  //     ></Route>
-  //     <Route
-  //       path='/register'
-  //       element={
-  //         <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-  //           <Register />
-  //         </Modal>
-  //       }
-  //     ></Route>
-  //     <Route
-  //       path='/reset-pass'
-  //       element={
-  //         <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-  //           <ResetPassword />
-  //         </Modal>
-  //       }
-  //     ></Route>
-  //   </>
-  // );
+  useEffect(() => {
+    const haveToken = localStorage.getItem('token');
+    setAuthentificated(!!haveToken);
+  }, [activeModal]);
 
-  
-
-  return (
-    <div className="App">      
-      <CardContext.Provider value={cardProvider}>
-      <UserContext.Provider value={userProvider}>
-      <Header 
-        setActiveModal ={setActiveModal}
-        user={currentUser} 
-        changeInput ={handleInput} 
-        onUpdateUser={handleUpdateUser}>
-      </Header>
-      <main className="main">     
-       <SearchInfo 
-         searchText= {searchQuery} 
-         searchCount={cards.length}>
-       </SearchInfo>    
-       <Routes location={backgroundLocation && {...backgroundLocation, path: initialPath || location}}>
-         <Route path='/' element = {<Catalog currentUser={currentUser}></Catalog>} ></Route>
-         <Route path='/product/:productId' element = {<ProductPages></ProductPages>} ></Route>
-         <Route path='/faq' element = {<Faq></Faq>}></Route>
-         <Route path='/favorites' element = {<Favorites currentUser={currentUser}></Favorites>}></Route>
-         <Route path='*' element = {<NoMatches></NoMatches>}></Route>
-          {/* <Route path='/login' element={
-              <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-                <Login ></Login>
-              </Modal>}>
-          </Route> */}
-          {/* <Route path='/register' element={
-                <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-                  <Register ></Register>
-                </Modal>}>
-          </Route> 
-          <Route path='/resetpass' element={
-                <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-                  <ResetPass></ResetPass>
-                </Modal>}>
-          </Route>                         */}
-          
-       </Routes> 
-
-        {backgroundLocation && <Routes>
-            <Route path='/login' element={
+  const authRoutes = (
+    <>
+      <Route path='/login' element={
                  <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
                      <Login ></Login>
                  </Modal>}>
@@ -252,9 +191,45 @@ function App() {
                   <ResetPass></ResetPass>
                 </Modal>}>
           </Route>                        
-         </Routes>}
+    </>
+  );
 
+  
+
+  return (
+    <div className="App">      
+      <CardContext.Provider value={cardProvider}>
+      <UserContext.Provider value={userProvider}>
+      <Header 
+        setActiveModal ={setActiveModal}
+        // isAuthentificated={isAuthentificated}
+        user={currentUser} 
+        changeInput ={handleInput} 
+        onUpdateUser={handleUpdateUser}>
+      </Header>
+      {isAuthentificated ? (
+      <main className="main">     
+       <SearchInfo 
+         searchText= {searchQuery} 
+         searchCount={cards.length}>
+       </SearchInfo>    
+       <Routes location={backgroundLocation && {...backgroundLocation, path: initialPath ||  location}}>
+         <Route path='/' element = {<Catalog currentUser={currentUser}></Catalog>} ></Route>
+         <Route path='/product/:productId' element = {<ProductPages></ProductPages>} ></Route>
+         <Route path='/faq' element = {<Faq></Faq>}></Route>
+         <Route path='/favorites' element = {<Favorites currentUser={currentUser}></Favorites>}></Route> 
+         {authRoutes}
+         <Route path='/chart' element = {<Chart></Chart>}></Route> 
+         <Route path='*' element = {<NoMatches></NoMatches>}></Route>        
+       </Routes> 
+         {backgroundLocation && <Routes>{authRoutes}</Routes>}
       </main>
+      ) : (
+        <div className='not-auth'>
+          <span className='auth-text'>Авторизуйтесь пожалуйста</span>
+          <Routes> {authRoutes}</Routes>
+        </div>
+      )}
        <Footer></Footer>
        </UserContext.Provider>
        </CardContext.Provider>

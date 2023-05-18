@@ -47,11 +47,11 @@ export function Rating ({rating,isEditable = false }) {
     
 
     return ( 
-     <div>
+     <span>
       {ratingArr.map((r, i) => {
         return <span key={i}>{r}</span>;
       })}
-    </div>
+    </span>
 
     )
     
