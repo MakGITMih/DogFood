@@ -9,42 +9,45 @@ import '../Rating/Rating.css'
 
 
 
-export function Rating ({rating,isEditable = false }) {
-
+export function Rating ({rating,isEditable = false, setRating }) {
     const [ratingArr, setRatingArr] = useState(new Array(5).fill(<></>));
-  const [ratingState, setRating] = useState(rating);
+    // const [ratingState, setRating] = useState(rating);
+    
+    const changeDisplay = (rate) => {
+      if (!isEditable) return; 
+      constructRating(rate);
+    };
 
-  const constructRating = useCallback((currentRating) => {
+    const changeRating = (ratingState) => {
+      if (!isEditable) return;
+      setRating(ratingState);
+    };
+  
+    // const changeRating = (ratingState) => {
+    //   setRating(ratingState)
+    // }
+
+    const constructRating = useCallback((currentRating) => {
     const updatedArray = ratingArr.map((ratingElement, index) => {
       return (
         <Star
         className=
         {`'star' ${ index < currentRating ? 'filled' : 'no-filled'}`}    
           onMouseEnter={() => changeDisplay(index + 1)}
-          onMouseLeave={() => changeDisplay(ratingState)}
-          onClick={()=>changeRating(index+1)}
-
+          onMouseLeave={() => changeDisplay(rating)}
+          onClick={()=>changeRating(index + 1)}
         />
       );
     });
 
-    const changeDisplay = (rate) => {
-      if (!isEditable) return; 
-      constructRating(rate);
-    };
-  
-    const changeRating = (ratingState) => {
-      setRating(ratingState)
-    }
-
     setRatingArr(updatedArray);
-  }, []);
+  }, [isEditable,rating]);
 
   useEffect(() => {
     constructRating(rating);
   }, [constructRating]);
 
-    
+  
 
     return ( 
      <span>

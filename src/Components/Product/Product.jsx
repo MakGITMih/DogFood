@@ -5,6 +5,7 @@ import {ReactComponent as Glass} from '../Images/glass.svg'
 import {ReactComponent as Heart} from '../Images/heart.svg'
 import {ReactComponent as Truck} from '../Images/truck.svg'
 import {ReactComponent as Union} from '../Images/union.svg'
+import {ReactComponent as Trash} from '../Images/trash.svg'
 import {ReactComponent as Star} from '../Images/starFill.svg'
 import { Rating } from "../Rating/Rating";
 import api from '../../Utils/Request'
@@ -21,12 +22,20 @@ export function Product ({
     likes = [],
     currentUser,
     description,
-    reviews, }) {
+    reviews,
+    onSendReview,
+    deleteReview,
+    stock,
+     }) {
 
      const discount_price = Math.round(price - (price * discount) / 100);
      const isLike = likes.some((id) => id === currentUser?._id);
      const desctiptionHTML = { __html: description };
+
      const [users, setUsers] = useState([]);
+     const [showForm, setShowForm] = useState(false);
+     const [rating, setRating] = useState(5);
+     const [counterCart, setCounterCart] = useState(0);
 
      let navigate = useNavigate();
 
@@ -36,11 +45,11 @@ export function Product ({
 
       const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
 
-      const sendReview = (data) => {
-        console.log(data);
-        // onSendReview({ ...data, rating });
-        // setShowForm(false);
-      };
+    //   const sendReview = (data) => {
+    //     console.log(data);
+    //     onSendReview({ ...data, rating });
+    //     setShowForm(false);
+    //   };
 
     //   const reviewRegister = register('email', {
     //     required: {
@@ -54,7 +63,7 @@ export function Product ({
     //     },
     //   });
 
-      const reviewRegister = register('textarea', {
+      const reviewRegister = register('text', {
         required: {
           value: true,
           message: VALIDATE_CONFIG.requiredMessage,
@@ -69,11 +78,9 @@ export function Product ({
       const getUser = (id) => {
         if (!users.length) return 'User';
         const user = users.find((el) => el._id === id);
-        // console.log( {user});
         return user.name ?? 'User'
         ;
       };     
-
       console.log( {reviews} );
 
       const options = {
@@ -81,6 +88,24 @@ export function Product ({
         month: 'short',
         year: 'numeric',
       };
+
+      const sendReview = (data) => {
+        onSendReview({ ...data,rating:rating});
+        setShowForm(false);
+      };
+ 
+      const handleCart = () => {
+        const goods = localStorage.getItem('goods');
+        if (!goods) {
+          localStorage.setItem('goods', JSON.stringify([{ name, counterCart }]));
+        } else {
+          localStorage.setItem(
+            'goods',
+            JSON.stringify([...JSON.parse(goods), { name, counterCart }])
+          );
+        }
+      };
+     
 
     return (
          <>  
@@ -91,7 +116,13 @@ export function Product ({
                      <h1 className="product__name">{name}</h1>
                      <div className="product__block">
                          <div className="product__articles">Артикул: <b>238793</b></div>
-                         <div className="product__stars" ><Rating isEditable={true} rating={5}></Rating> </div> 
+                         <div className="product__stars" >
+                            <Rating 
+                                 isEditable={true} 
+                                 rating={rating}
+                                 setRating={setRating}>
+                            </Rating>                          
+                         </div> 
                          <div className="product__reviews">{reviews?.length} Отзыва</div> 
                      </div>
                 </div>
@@ -112,14 +143,22 @@ export function Product ({
                          </div>
                          <div className="pictures__wrap-basket">
                              <div className="pictures__counter">
-                                 <button className="pictures__minus">-</button>
-                                 <span className="pictures__zero">0</span>
-                                 <button className="pictures__plus">+</button>
+                                 <button className="pictures__minus" onClick={() =>
+                                 counterCart > 0 && 
+                                 setCounterCart(counterCart - 1)}
+                                 >-</button>
+                                 <span className="pictures__zero">{counterCart}</span>
+                                 <button className="pictures__plus" 
+                                 onClick={() =>
+                                 stock > counterCart && 
+                                 setCounterCart(counterCart + 1)}
+                                 >+</button>
                              </div>
                              <div className="pictures__wrap-btn"> 
-                                 <button className="pictures__btn">В корзину</button>
+                                 <button className="pictures__btn" onClick={handleCart}>В корзину</button>
                              </div>                 
                          </div>
+                         <span className="pictures__stock">Остаток : {stock}</span>
                          <button onClick={onProductLike} className="pictures__wrap-favorites"> 
                             <Heart className={`'pictures__icon-heart' ${isLike ? '_activ' : 'pictures__icon-heart'}`}
                             >
@@ -192,17 +231,25 @@ export function Product ({
                 <section className="reviews">
                     <div className="reviews__wrap-title">                  
                          <h2 className="reviews__title">Отзывы</h2>
-                         <button className="reviews__btn">Написать отзыв</button>
-                         <Form handleFormSubmit={handleSubmit(sendReview)} title ='Написать отзыв'>
+                        { !showForm ? (
+                        <button className="reviews__btn" onClick={() => setShowForm(true)}>Написать отзыв</button>
+                        ) : (
+                         <Form 
+                         handleFormSubmit={handleSubmit(sendReview)} title ='Написать отзыв'>
                             <div className="reviews__grade">
                          <span className="reviews__grade-text">Общая оценка</span> 
-                         <span className="reviews__grade-star"><Rating isEditable={true} rating={5}></Rating></span>
+                         <span className="reviews__grade-star">
+                            <Rating 
+                                 isEditable={true} 
+                                 rating={rating}
+                                 setRating={setRating}>
+                            </Rating></span>
                          </div>
                             <div className="reviews__wrap-form">            
                                  <textarea className="reviews__textarea"
                                      {...reviewRegister}
                                      type="text"
-                                     name="textarea"
+                                     name="text"
                                      placeholder="Поделитесь впечатлениями о товаре" 
                                  />
                                  {errors.textarea && (
@@ -210,14 +257,23 @@ export function Product ({
                                  <button type="submit"                                className="modal__password form__btn"
                                   >Отправить</button>
                              </div>
-                         </Form>
+                         </Form>)}
                     </div>
                    <div className="reviews__wrap-reviews">
-                     {reviews?.map((e) => 
+                     {reviews
+                     ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+                     .map((e) => 
                      <div className="">
-                         <div className="reviews__wrap-user">
+                         <div key={e.created_at} className="reviews__wrap-user">
                              <span className="reviews__user">{getUser(e.author._id)}</span>
                              <span className="reviews__data">{new Date(e.created_at).toLocaleString('ru', options)}</span>
+                             {e.author._id === currentUser._id && (
+                             <span className="reviews__trash" 
+                             onClick={() => deleteReview(e._id)}> 
+                             <Trash></Trash>
+                             </span>
+                             )}
+                             
                          </div>
                          <div className="reviews__rating">
                              <Rating rating={e.rating}></Rating> 

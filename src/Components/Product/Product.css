@@ -96,6 +96,7 @@
 .pictures__wrap-basket {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 15px;
 }
 
 .pictures__counter {
@@ -145,6 +146,14 @@
     font-size: 16px;
     line-height: 20px;
     background-color: var(--bg-color); 
+}
+
+.pictures__stock {
+    /* padding-top: 15px; */
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 20px;
+    color:var(--sorting-color);
 }
 
 .pictures__wrap-favorites {
@@ -342,24 +351,28 @@
     font-size: 14px;
     line-height: 20px;
 }
+
 .description__two-benefit {
     margin-bottom: 12px;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
 }
+
 .description__three-benefit {
     margin-bottom: 12px;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
 }
+
 .description__four-benefit {
     margin-bottom: 12px;
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
 }
+
 .description__five-benefit {
     font-weight: 400;
     font-size: 14px;
@@ -368,10 +381,13 @@
 
 .reviews {
 }
+
 .reviews__wrap-title {
 }
+
 .reviews__title {
 }
+
 .reviews__btn {
     margin: 20px 0px;
     padding: 10px 18px;
@@ -404,13 +420,11 @@
     resize: none;
 }
 
-
 .reviews__wrap-reviews {
 }
+
 .reviews__wrap-user {
-    margin-bottom: 8px;
-    
-    
+    margin-bottom: 8px;   
 }
 .reviews__user {
     margin-right: 8px;
@@ -422,12 +436,22 @@
     font-weight: 400;
     font-size: 14px;
     line-height: 20px;
-    color: var(--sorting-color);
+    color: var(--sorting-color); 
 }
-.reviews__rating{
-    /* margin-bottom: 8px; */
-   
+
+.reviews__trash{
+    /* display: none; */
+    opacity: 0.5;
+    margin-left: 25px;
+    cursor: pointer;
 }
+.reviews__trash:hover{
+    opacity: 1;
+}
+
+.reviews__rating{  
+}
+
 .reviews__wrap-where{
     margin-bottom: 16px;
     
@@ -446,7 +470,3 @@
     font-size: 14px;
     line-height: 20px;
 }
-/* .revi{
-    display: flex;
-    margin-right: 10px;
-} */
