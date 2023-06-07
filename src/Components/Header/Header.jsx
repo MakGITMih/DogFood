@@ -4,12 +4,18 @@ import Logo from '../Images/logo.svg'
 import Bag from '../Images/buy.svg'
 import Muzzle from '../Images/muzzle.svg'
 import Close from '../Images/close.svg'
+// import Logout from '../Images/logout.svg'
 import {ReactComponent as Heart} from '../Images/heart.svg'
+import {ReactComponent as Logout} from '../Images/logout.svg'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CardContext } from "../../Context/CardContext";
+import { UserContext } from "../../Context/UserContext";
 
 
-export function Header ({changeInput,user,onUpdateUser, setActiveModal,isAuthentificated}) {
+export function Header ({changeInput,user,onUpdateUser, 
+   // setActiveModal,
+   // isAuthentificated
+}) {
     // const handleClickButtonEntry = (e) => {
     //     e.preventDefault();
     //     onUpdateUser({ about: 'Писатель', name: "Васисуалий" });
@@ -17,12 +23,17 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal,isAuthent
       const { favorites } = useContext(CardContext); 
       const location = useLocation();
 
+      const { isAuthentificated,
+          setActiveModal
+          } = useContext(UserContext)
+
    //    let navigate = useNavigate();
+
    //   const handleClick = () => {
    //      navigate('/');
    //    };
 
-
+// console.log(isAuthentificated);
       
     return(
       <header className="header">
@@ -55,13 +66,13 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal,isAuthent
                          </Link>
                          {/* <span>{user?.name} </span>
                          <span>{user?.about} </span> */}
-                         {/* { !isAuthentificated &&  */}
+                         { !isAuthentificated && 
                          <Link to ={'/login'} 
                             state = {{backgroundLocation: location, initialPath: location.   pathname}} 
                             onClick = {() => setActiveModal (true)}>
                                   <span className="header__entry">Вход</span>
                          </Link>
-                         {/* } */}
+                         }                       
                           <Link to ={'/resetpass'}
                             state = {{backgroundLocation: location, initialPath:  location.   pathname}} 
                             onClick = {() => setActiveModal (true)}>
@@ -78,11 +89,19 @@ export function Header ({changeInput,user,onUpdateUser, setActiveModal,isAuthent
                             <img className="header__bag-img" src={Bag} alt="Что то сломалось..."/>
                          </button>
                          </Link>
-                         {/* <Link to ={'/form'}>
-                         <button className="header__muzzle" >
+                         { isAuthentificated ? (
+                         <Link to ={'/profile'}>
+                         <button className="header__muzzle" onClick = {() => setActiveModal (true)} >
                             <img  className="header__muzzle-img" src={Muzzle} alt="Что то сломалось..."/>
                         </button>
-                        </Link> */}
+                        </Link>)
+                          :
+                        (<Link to ={'/login'} >
+                         <button  className="header__muzzle" onClick = {() => setActiveModal (true)} >
+                           <Logout className="header__muzzle-img"></Logout>
+                         </button>
+                         </Link>)
+                        }
                      </div>
                 </div>               
             </div>

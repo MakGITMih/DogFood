@@ -8,15 +8,17 @@ import { useState } from "react";
 import { useContext } from "react";
 import { parseJwt } from "../../Utils/ParseJWT";
 import { register } from "../Register/Register";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../Context/UserContext";
 
 
 
-
-export function ResetPass () {
+export function ResetPass ({ setAuthentificated }) {
  
     const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
     const [tokenResp, setTokenResp] = useState(null);
-    // const { currentUser } = useContext(UserContext);
+    const { currentUser } = useContext(UserContext)
+    const navigate = useNavigate()
     // console.log(currentUser);
 
     const emailRegister = register('email', {
@@ -31,13 +33,21 @@ export function ResetPass () {
         },
       });
 
-      const sendData = async (data) => {
+      const sendData = async (formData) => {
         if (tokenResp) {
-          const {_id} = parseJwt(data.token);
-          await authApi.resetPassToken({ password: data.password }, _id, data.token);
+          const { token, data } = await authApi.resetPassToken(
+            { password: formData.password },
+            formData.token,
+          )
+          if (token) {
+            localStorage.setItem('token', token)
+            localStorage.setItem('userData', JSON.stringify(data))
+            setAuthentificated(true)
+            navigate('/')
+          }
         }
         else {
-          await authApi.resetPass(data);
+          await authApi.resetPass(formData);
           setTokenResp(true);
         }
       };

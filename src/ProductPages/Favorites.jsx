@@ -12,7 +12,7 @@ export function Favorites ({currentUser}) {
 
     let navigate = useNavigate();
      const handleClick = () => {
-        navigate('/');
+      navigate(-1);
       };
      
     return (

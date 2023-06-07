@@ -20,6 +20,7 @@ import { Register } from '../Register/Register';
 import { ResetPass } from '../ResetPass/ResetPass';
 import { useLocation } from 'react-router-dom';
 import { Chart } from '../Chart/Chart.jsx';
+import { Profile } from '../Profile/Profile';
 
 function App() {
    const[cards,setCards]=useState([]);
@@ -129,18 +130,7 @@ function App() {
     //   const filteredCards = cards.sort((a, b) => b?.likes?.length - a?.likes?.length);
     //   setCards([...filteredCards]);
     // }                          
-  }
-
-  const cardProvider = {
-    cards,
-    favorites,
-    onSortData:sortedData,
-  };
-
-  const userProvider = {
-    handleProductLike: handleProductLike,
-    currentUser: currentUser,
-  };
+  } 
 
   // const addContact = (contact) => {
   //   setContacts([...contacts, contact]);
@@ -172,7 +162,23 @@ function App() {
   useEffect(() => {
     const haveToken = localStorage.getItem('token');
     setAuthentificated(!!haveToken);
-  }, [activeModal]);
+  }, [
+    // activeModal
+  ]);
+
+  const cardProvider = {
+    cards,
+    favorites,
+    onSortData:sortedData,
+  };
+
+  const userProvider = {
+    handleProductLike,
+    currentUser,
+    isAuthentificated,
+    setActiveModal,
+    setAuthentificated,
+  };
 
   const authRoutes = (
     <>
@@ -188,27 +194,29 @@ function App() {
           </Route> 
           <Route path='/resetpass' element={
                 <Modal activeModal={activeModal} setActiveModal={setActiveModal}>
-                  <ResetPass></ResetPass>
+                  <ResetPass setAuthentificated={setAuthentificated} ></ResetPass>
                 </Modal>}>
           </Route>                        
     </>
   );
 
-  
+  // console.log({location});
 
   return (
     <div className="App">      
       <CardContext.Provider value={cardProvider}>
       <UserContext.Provider value={userProvider}>
       <Header 
-        setActiveModal ={setActiveModal}
+        // setActiveModal ={setActiveModal}
         // isAuthentificated={isAuthentificated}
         user={currentUser} 
         changeInput ={handleInput} 
-        onUpdateUser={handleUpdateUser}>
+        onUpdateUser={handleUpdateUser}
+        // isAuthentificated={isAuthentificated}
+        >
       </Header>
       {isAuthentificated ? (
-      <main className="main">     
+      <main className="main"> 
        <SearchInfo 
          searchText= {searchQuery} 
          searchCount={cards.length}>
@@ -216,6 +224,7 @@ function App() {
        <Routes location={backgroundLocation && {...backgroundLocation, path: initialPath ||  location}}>
          <Route path='/' element = {<Catalog currentUser={currentUser}></Catalog>} ></Route>
          <Route path='/product/:productId' element = {<ProductPages></ProductPages>} ></Route>
+         <Route path='/profile' element = {<Profile></Profile>}></Route>
          <Route path='/faq' element = {<Faq></Faq>}></Route>
          <Route path='/favorites' element = {<Favorites currentUser={currentUser}></Favorites>}></Route> 
          {authRoutes}

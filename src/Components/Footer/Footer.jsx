@@ -30,7 +30,10 @@ export function Footer () {
                          <span className="footer__reviews">Отзывы</span>
                 </div>
                 <div className="footer__wrap-subtitles-rigth" >
-                        <Link to ={'/chart'}><span className="footer__catalog">Оплата и доставка</span> </Link>
+                        <Link to ={'/chart'}><span className="footer__catalog">
+                            {/* Оплата и доставка */}
+                             График
+                            </span> </Link>
                          <Link to ={'/faq'} ><span className="footer__stock">Часто спрашивают</span></Link>
                          <span className="footer__news">Обратная связь</span>
                          <span className="footer__reviews">Контакты</span>                       

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Form } from "../Form/Form";
 import '../Login/Login.css'
 import { useForm } from "react-hook-form";
@@ -6,12 +6,16 @@ import { EMAIL_REGEXP, PASS_REGEXP, VALIDATE_CONFIG } from "../Constants/Constan
 import { useLocation, useNavigate } from 'react-router-dom';
 import { authApi } from "../../Utils/AuthApi";
 import { login } from "../../Utils/AuthApi";
+import { UserContext } from "../../Context/UserContext";
 
 
 
 export function Login () {
  
     const { register, handleSubmit, formState: {errors} } = useForm({mode: "onBlur"});
+
+    const {setAuthentificated} = useContext (UserContext)
+
     const navigate = useNavigate();
     // const location = useLocation(); 
     // const initialPath = location.state?.initialPath;
@@ -44,6 +48,7 @@ export function Login () {
         // const result =  await authApi.login (data);
         const result = await login(data);
         localStorage.setItem(`token`, result.token);
+        setAuthentificated(true)
         navigate('/')
       } catch (error) {
         console.log(error);
