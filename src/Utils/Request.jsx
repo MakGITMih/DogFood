@@ -5,9 +5,10 @@ const onResponse = (res) => {
 
 
 class Api {
-    constructor ({baseUrl,headers}) {
+    constructor ({baseUrl,headers,configuration}) {
         this._headers = headers;
         this._baseUrl = baseUrl;
+        this._configuration = configuration;
     }
     getProductsList() {
         return fetch(`${this._baseUrl}/products`, { headers: this._headers }).then(
@@ -15,10 +16,10 @@ class Api {
         );
     }
     getUserInfo() {
-        return fetch(`${this._baseUrl}/users/me`, { headers: this._headers }).then(
-          onResponse
-        );
-      }
+      return fetch(`${this._baseUrl}/users/me`,  { headers: this._headers }).then(
+        onResponse
+      );
+    }
       search(searchQuery) {
         return fetch(`${this._baseUrl}/products/search?query=${searchQuery}`, {
           headers: this._headers,
@@ -60,6 +61,13 @@ class Api {
           headers: this._headers,
         }).then(onResponse);
       }
+      editUserAvatar(body) {
+        return fetch(`${this._baseUrl}/v2/group-9/users/me/avatar`, {
+          ...this._configuration(),
+          method: "PATCH",
+          body: JSON.stringify(body),
+        }).then((res) => onResponse(res))
+      }
       addReview(productId,body){
         return fetch(`${this._baseUrl}/products/review/${productId}`, {
           headers: this._headers,
@@ -75,6 +83,19 @@ class Api {
       }
 }
 
+const configuration = () => {
+
+  console.log('HELLO i was called');
+  return {
+    headers: {
+      "content-type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+      Authorization:
+    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEzMGFhNGFhMzk3MTIxODM5MDc4MzgiLCJncm91cCI6Imdyb3VwLTkiLCJpYXQiOjE2Nzg5Njk2NjksImV4cCI6MTcxMDUwNTY2OX0.qgSzU9IOmfL4-xCbOX2GShmmNczrcJ8Nwoc9wmGxb1s',  
+
+    },
+  };
+};
 
 const config = {
   baseUrl:
@@ -83,11 +104,18 @@ const config = {
   headers: {
     'content-type': 'application/json',
     Authorization:
-    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEzMGFhNGFhMzk3MTIxODM5MDc4MzgiLCJncm91cCI6Imdyb3VwLTkiLCJpYXQiOjE2Nzg5Njk2NjksImV4cCI6MTcxMDUwNTY2OX0.qgSzU9IOmfL4-xCbOX2GShmmNczrcJ8Nwoc9wmGxb1s',
-   
+    // `Bearer ${localStorage.getItem("token")}`,
+    'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDEzMGFhNGFhMzk3MTIxODM5MDc4MzgiLCJncm91cCI6Imdyb3VwLTkiLCJpYXQiOjE2Nzg5Njk2NjksImV4cCI6MTcxMDUwNTY2OX0.qgSzU9IOmfL4-xCbOX2GShmmNczrcJ8Nwoc9wmGxb1s',  
   },
+  configuration: configuration,
 };
 
 const api = new Api(config);
 
 export default api;
+
+// export const getRickAndMortyList = async () => {
+//   return fetch(`https://rickandmortyapi.com/api/character/`, {
+//     headers: config.headers,
+//   }).then((res) => res.json());
+// };

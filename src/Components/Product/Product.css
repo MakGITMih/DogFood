@@ -430,10 +430,18 @@
 }
 
 .reviews__wrap-reviews {
+    display: flex;
+
 }
 
 .reviews__wrap-user {
-    margin-bottom: 8px;   
+    margin-bottom: 8px;
+    margin-left: 20px;   
+}
+.reviews__avatar{
+   width: 70px;
+   height: 70px;
+   border-radius: 50%;
 }
 .reviews__user {
     margin-right: 8px;
@@ -459,6 +467,7 @@
 }
 
 .reviews__rating{  
+    margin: 16px 0px;
 }
 
 .reviews__wrap-where{

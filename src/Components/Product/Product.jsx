@@ -82,8 +82,11 @@ export function Product({
     const getUser = (id) => {
         if (!users.length) return 'User';
         const user = users.find((el) => el._id === id);
-        return user.name ?? 'User'
-            ;
+        console.log({ user});
+        if (user.avatar.includes('default-image')) {
+            return {...user, avatar : 'https://cs14.pikabu.ru/post_img/2023/02/13/8/1676295806139337963.jpg'}
+          }
+        return user ;
     };
     //   console.log( {reviews} );
 
@@ -138,7 +141,7 @@ export function Product({
                                     setRating={setRating}>
                                 </Rating>
                             </div>
-                            <div className="product__reviews">{reviewsProduct?.length} Отзыва</div>
+                            <div className="product__reviews">{reviews?.length} Отзыва</div>
                         </div>
                     </div>
                     <section className="pictures">
@@ -309,13 +312,14 @@ export function Product({
                              </div>
                          </Form>)} */}
                         </div>
-                        <div className="reviews__wrap-reviews">
+                        <div className="reviews">
                             {reviewsProduct
                                 ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
                                 .map((e) =>
-                                    <div className="">
-                                        <div key={e.created_at} className="reviews__wrap-user">
-                                            <span className="reviews__user">{getUser(e.author._id)}</span>
+                                
+                                    <div className="reviews__wrap-reviews">
+                                        <div className="reviews__wrap-avatar"><img className="reviews__avatar" src={getUser(e.author._id)?.avatar} alt="avatar" /></div>
+                                        <div key={e.created_at} className="reviews__wrap-user">                          <span className="reviews__user">{getUser(e.author._id)?.name ?? 'User'}</span>
                                             <span className="reviews__data">{new Date(e.created_at).toLocaleString('ru', options)}</span>
                                             {e.author._id === currentUser._id && (
                                                 <span className="reviews__trash"
@@ -323,16 +327,15 @@ export function Product({
                                                     <Trash></Trash>
                                                 </span>
                                             )}
-                                        </div>
-                                        <div className="reviews__rating">
-                                            <Rating rating={e.rating}></Rating>
-                                        </div>
-                                        <div className="reviews__wrap-where">
-                                            <span className="reviews__where">откуда</span>
-                                        </div>
-                                        <div className="reviews__wrap-text">
-                                            <span className="reviews__text">{e.text}</span>
-                                            
+                                            <div className="reviews__rating">
+                                                <Rating rating={e.rating}></Rating>
+                                            </div>
+                                            <div className="reviews__wrap-where">
+                                                <span className="reviews__where">откуда</span>
+                                            </div>
+                                            <div className="reviews__wrap-text">
+                                                <span className="reviews__text">{e.text}</span>
+                                            </div>
                                         </div>
                                     </div>)}
                         </div>

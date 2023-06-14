@@ -44,17 +44,23 @@ function App() {
      return debouncedValue;
    }
 
-   useEffect (() => {
-       api
+  useEffect(() => {
+    if (!isAuthentificated) {
+      return;
+    }
+    api
       .search(searchQuery)
       .then((res) => setCards(res))
       .catch((err) => console.log(err));
-      navigate('/');
-      },[debounceSearch]);
+    navigate('/');
+  }, [debounceSearch]);
 
    const handleInput = (e) => {setSearchQuery(e.target.value);}
 
    useEffect(() => {
+    if (!isAuthentificated) {
+      return;
+    }
     Promise.all([api.getProductsList(), api.getUserInfo()]).then(
       ([productsData, userData]) => {
         setCards(productsData.products);
@@ -65,7 +71,7 @@ function App() {
         setFavorites(favProducts);
       }
     );
-  }, []);
+  }, [isAuthentificated]);
 
 
   function handleUpdateUser(userUpdateData) {
@@ -162,9 +168,9 @@ function App() {
   useEffect(() => {
     const haveToken = localStorage.getItem('token');
     setAuthentificated(!!haveToken);
-  }, [
-    // activeModal
-  ]);
+  }, 
+  // [activeModal]
+  );
 
   const cardProvider = {
     cards,
@@ -178,6 +184,7 @@ function App() {
     isAuthentificated,
     setActiveModal,
     setAuthentificated,
+    setCurrentUser
   };
 
   const authRoutes = (

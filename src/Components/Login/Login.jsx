@@ -2,11 +2,12 @@ import React, { useContext } from "react";
 import { Form } from "../Form/Form";
 import '../Login/Login.css'
 import { useForm } from "react-hook-form";
-import { EMAIL_REGEXP, PASS_REGEXP, VALIDATE_CONFIG } from "../Constants/Constants";
+
 import { useLocation, useNavigate } from 'react-router-dom';
-import { authApi } from "../../Utils/AuthApi";
+
 import { login } from "../../Utils/AuthApi";
 import { UserContext } from "../../Context/UserContext";
+import { emailRegister, passwordRegister } from "../../Utils/Utils";
 
 
 
@@ -20,32 +21,31 @@ export function Login () {
     // const location = useLocation(); 
     // const initialPath = location.state?.initialPath;
 
-    const emailRegister = register('email', {
-        required: {
-          value: true,
-          message:
-           VALIDATE_CONFIG.requiredMessage,
-        },
-        pattern: {
-          value: EMAIL_REGEXP,
-          message: VALIDATE_CONFIG.email,
-        },
-      });
+    // const emailRegister = register('email', {
+    //     required: {
+    //       value: true,
+    //       message:
+    //        VALIDATE_CONFIG.requiredMessage,
+    //     },
+    //     pattern: {
+    //       value: EMAIL_REGEXP,
+    //       message: VALIDATE_CONFIG.email,
+    //     },
+    //   });
 
-      const passwordRegister = register('password', {
-        required: {
-          value: true,
-          message: VALIDATE_CONFIG.requiredMessage,
-        },
-        pattern: {
-          value: PASS_REGEXP,
-          message: VALIDATE_CONFIG.password,
-        },
-      });
+    //   const passwordRegister = register('password', {
+    //     required: {
+    //       value: true,
+    //       message: VALIDATE_CONFIG.requiredMessage,
+    //     },
+    //     pattern: {
+    //       value: PASS_REGEXP,
+    //       message: VALIDATE_CONFIG.password,
+    //     },
+    //   });
 
       const sendData = async (data) => {
         try {
-        // const result =  await authApi.login (data);
         const result = await login(data);
         localStorage.setItem(`token`, result.token);
         setAuthentificated(true)
@@ -56,15 +56,12 @@ export function Login () {
     };
 
 
-     
-
-
     return (
          <>
          <Form handleFormSubmit={handleSubmit(sendData)} title='Вход'>
         <div className="wrap__modal">            
             <input className="modal__email"
-                 {...emailRegister}
+                 {...emailRegister(register)}
                  type="email"
                  name="email"
                  placeholder="Email" 
@@ -73,7 +70,7 @@ export function Login () {
             <p className='form__necessarily'>{errors?.email?.message}</p>
           )}
             <input className="modal__password"
-                 {...passwordRegister}
+                 {...passwordRegister(register)}
                  type="password"
                  name="password"
                  placeholder="Пароль" 

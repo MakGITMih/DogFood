@@ -13,6 +13,7 @@ export function ProductPages () {
     const [currentUser, setCurrentUser] = useState('');
     const[isLoading,setIsLoading] = useState (false);
     const[product,setProduct] = useState(null)
+    const [reviews, setReviews] = useState([]);
 
     const { handleProductLike } = useContext(UserContext);
     const { favorites } = useContext(CardContext);
@@ -56,20 +57,29 @@ export function ProductPages () {
           } catch (error) {
             openNotification('error', 'Error', 'Не получилось удалить отзыв');
           }
-        };    
+        };   
+      
+        useEffect(() => {
+          if (product?.reviews && Array.isArray(product?.reviews)) {
+            setReviews([...product?.reviews?.sort((a,b) => new Date(b.updated_at) - new Date(a.updated_at))])
+          }
+        }, [product?.reviews]);
         
         
     return (
       <main className="main">
       <div className="main__container _container">
-            {isLoading ? <Spinner></Spinner> : <Product 
+            {isLoading ? (
+            <Spinner></Spinner>
+            ): ( <Product 
              {...product}
+             reviews={reviews}
              currentUser={currentUser}
              onProductLike={onProductLike}
              setProduct ={setProduct}
              onSendReview ={onSendReview}
              deleteReview={deleteReview}
-             ></Product> }
+             ></Product> )}
           </div>
      </main>     
     )
