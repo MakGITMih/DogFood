@@ -85,7 +85,6 @@ class Api {
 
 const configuration = () => {
 
-  console.log('HELLO i was called');
   return {
     headers: {
       "content-type": "application/json",

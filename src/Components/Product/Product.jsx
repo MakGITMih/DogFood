@@ -315,8 +315,7 @@ export function Product({
                         <div className="reviews">
                             {reviewsProduct
                                 ?.sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                                .map((e) =>
-                                
+                                .map((e) =>                               
                                     <div className="reviews__wrap-reviews">
                                         <div className="reviews__wrap-avatar"><img className="reviews__avatar" src={getUser(e.author._id)?.avatar} alt="avatar" /></div>
                                         <div key={e.created_at} className="reviews__wrap-user">                          <span className="reviews__user">{getUser(e.author._id)?.name ?? 'User'}</span>

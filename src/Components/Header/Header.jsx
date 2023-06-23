@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import './Header.css'
 import Logo from '../Images/logo.svg'
 import Bag from '../Images/buy.svg'
@@ -10,6 +10,8 @@ import {ReactComponent as Logout} from '../Images/logout.svg'
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { CardContext } from "../../Context/CardContext";
 import { UserContext } from "../../Context/UserContext";
+import { useTranslation } from "react-i18next";
+import { changeLanguage } from "i18next";
 
 
 export function Header ({changeInput,user,onUpdateUser, 
@@ -22,6 +24,16 @@ export function Header ({changeInput,user,onUpdateUser,
     //   };
       const { favorites } = useContext(CardContext); 
       const location = useLocation();
+      const { i18n } = useTranslation ();
+      const [lang, setLang] = useState('ru');
+
+      const changeLanguage = () => {
+        const lang = localStorage.getItem('lang') ?? 'ru';
+        const newLang = lang === 'ru' ? 'en' : 'ru'
+        i18n.changeLanguage(newLang);
+        setLang(newLang)
+        localStorage.setItem('lang', newLang);
+      }
 
       const { isAuthentificated,
           setActiveModal
@@ -45,6 +57,7 @@ export function Header ({changeInput,user,onUpdateUser,
                      </div> 
                   </Link>     
                 </div>
+                <button className='reviews__btn' onClick={()=> changeLanguage ()}>{lang}</button>
                 <div className="header__wrap-search" > 
                      <form action="#" className="header__search">                        
                          <input className="header__search-input" type="text" autoFocus placeholder="Поиск" onInput={changeInput} 
